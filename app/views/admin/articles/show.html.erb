@@ -1,0 +1,81 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>文章信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">分类</label>
+          <div class="chaos-form-item">
+            <span><%= @article.category.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <span><%= @article.title %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">来源</label>
+          <div class="chaos-form-item">
+            <span><%= @article.source %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">内容</label>
+          <div class="chaos-form-item">
+            <%= raw @article.content %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否可见</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @article.visible? %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否精华</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @article.featured? %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">显示时间</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= datetime_tag @article.displayed_at %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">创建时间</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= datetime_tag @article.created_at %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">更新时间</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= datetime_tag @article.updated_at %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_article_path(@article) %>
+        <%= chaos_button_to_destroy url_for([:admin, @article]) %>
+        <%= chaos_button_to_list admin_articles_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

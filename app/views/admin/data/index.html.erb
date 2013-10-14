@@ -1,0 +1,31 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>数据统计</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= flash_tag %>
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>数据表</th>
+          <th>数据总量</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @statistics.each do |table_name, count| %>
+      <tr>
+        <td><%= table_name %></td>
+        <td><%= count %></td>
+        <td><%= chaos_button_to name: '<i class="icol-page-white-put"></i> 迁移', class: 'btn-small', path: migrate_admin_data_path(table_name: table_name) %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

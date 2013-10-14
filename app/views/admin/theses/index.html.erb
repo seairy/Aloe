@@ -1,0 +1,44 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>论文列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_thesis_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>作者</th>
+          <th>是否精华</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"><%= chaos_paginate @theses %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @theses.each do |thesis| %>
+      <tr>
+        <td><%= thesis.title.truncate(38) %></td>
+        <td><%= thesis.author %></td>
+        <td><%= styled_boolean_tag thesis.featured? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, thesis]) %>
+          <%= chaos_button_to_edit edit_admin_thesis_path(thesis) %>
+          <%= chaos_button_to_destroy url_for([:admin, thesis]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

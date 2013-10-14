@@ -1,0 +1,47 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>创建新研讨会</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @seminar], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @seminar %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">简介</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :brief_introduction %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">介绍</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :introduction %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">相关通讯</label>
+          <div class="chaos-form-item">
+            <%= f.collection_select :newsletter_id, Newsletter.sorted, :id, :name, :prompt => '无' %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">位置</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :position %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回研讨会列表', path: admin_seminars_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

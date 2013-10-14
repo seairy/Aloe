@@ -1,0 +1,38 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>用户列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>角色</th>
+          <th>账号</th>
+          <th>姓名</th>
+          <th>是否启用</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5"><%= chaos_paginate @administrators %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @administrators.each do |administrator| %>
+      <tr>
+        <td><%= administrator.role.name %></td>
+        <td><%= administrator.account %></td>
+        <td><%= administrator.name %></td>
+        <td><%= styled_boolean_tag administrator.available? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, administrator]) %>
+          <%= chaos_button_to_edit edit_admin_administrator_path(administrator) %>
+          <%= chaos_button_to_destroy url_for([:admin, administrator]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

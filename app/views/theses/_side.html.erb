@@ -1,0 +1,8 @@
+<div id="side">
+  <% 2013.downto(2006).each do |year| %>
+  <div class="side-row">
+    <%= link_to "#{year}年" %>
+  </div>
+  <% end %>
+  <%= side_favorites_tag %>
+</div>

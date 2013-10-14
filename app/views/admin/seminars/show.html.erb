@@ -1,0 +1,47 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>研讨会信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @seminar.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">简介</label>
+          <div class="chaos-form-item">
+            <span><%= raw @seminar.brief_introduction %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">介绍</label>
+          <div class="chaos-form-item">
+            <span><%= raw @seminar.introduction %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">相关通讯</label>
+          <div class="chaos-form-item">
+            <span><%= @seminar.newsletter.blank? ? '无' : @seminar.newsletter.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">位置</label>
+          <div class="chaos-form-item">
+            <span><%= @seminar.position %></span>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_seminar_path(@seminar) %>
+        <%= chaos_button_to_destroy url_for([:admin, @seminar]) %>
+        <%= chaos_button_to_list admin_seminars_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

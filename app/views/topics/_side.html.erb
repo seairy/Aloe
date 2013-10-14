@@ -1,0 +1,11 @@
+<div id="side">
+  <div class="side-row">
+    <%= link_to raw("&raquo; 全部"), topics_path %>
+  </div>
+  <% Forum.sorted.each do |forum| %>
+  <div class="side-row">
+    <%= link_to raw "&raquo; #{forum.name}" %>
+  </div>
+  <% end %>
+  <%= side_favorites_tag %>
+</div>

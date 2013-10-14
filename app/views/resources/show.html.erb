@@ -1,0 +1,17 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="resource-show">
+    <h1><%= @resource.title %></h1>
+    <div class="property">
+      <ul>
+        <li>作者：<%= @resource.author %></li>
+        <li>所在机构：<%= @resource.organization %></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="description">
+      <%= raw @resource.description %>
+    </div>
+  </div>
+</div>
+<%= render 'side' %>

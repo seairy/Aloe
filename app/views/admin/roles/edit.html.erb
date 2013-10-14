@@ -1,0 +1,46 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>编辑角色信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @role], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @role %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">超级权限</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= f.check_box :omnipotent %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">通用权限</label>
+          <div class="chaos-form-item large">
+            <ul class="chaos-form-list inline">
+              <li><%= f.check_box :creatable %>创建</li>
+              <li><%= f.check_box :updatable %>更新</li>
+              <li><%= f.check_box :listable %>查看列表</li>
+              <li><%= f.check_box :showable %>查看信息</li>
+              <li><%= f.check_box :destroyable %>删除</li>
+              <li><%= f.check_box :searchable %>搜索</li>
+              <li><%= f.check_box :operatable %>其它操作</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回角色信息', path: url_for([:admin, @role]) %>
+        <%= chaos_button_to_return '返回角色列表', path: admin_roles_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

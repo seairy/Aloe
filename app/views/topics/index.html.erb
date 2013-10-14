@@ -1,0 +1,16 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="topic-list">
+    <ul>
+      <% @topics.each do |topic| %>
+      <li>
+        <h2><%= link_to "[#{topic.original? ? '原创' : '转发'}]#{topic.title.truncate(32)}", topic %><span><%= date_tag topic.displayed_at %></span></h2>
+        <div class="forum"><%= topic.forum.name %></div>
+        <div class="content"><%= (strip_tags topic.content).strip.truncate(150) %></div>
+      </li>
+      <% end %>
+    </ul>
+    <div class="pagination"><%= will_paginate @topics %></div>
+  </div>
+</div>
+<%= render 'side' %>

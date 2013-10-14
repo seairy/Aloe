@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>世界汉语教学学会</title>
+	<%= stylesheet_link_tag 'aloe', 'reset', :media => "all" %>
+	<%= javascript_include_tag 'application', 'unslider' %>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+    </div>
+    <div id="navi">
+      <ul>
+        <li><%= link_to '首页', root_path %></li>
+        <li><%= link_to '综合信息', articles_path %></li>
+        <li><%= link_to '教学资源', resources_path %></li>
+        <li><%= link_to '交流互动', topics_path %></li>
+        <li><%= link_to '图书展示', books_path %></li>
+        <li><%= link_to '历届研讨会' %></li>
+        <li><%= link_to '世汉论坛', theses_path %></li>
+        <li><%= link_to '关于我们' %></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+    <div id="content">
+      <%= yield %>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+      <ul>
+        <li>世界汉语教学学会 - The International Society for Chinese Language Teaching</li>
+        <li>如有任何疑问或建议请与我们联系，本站内容版权所有：世界汉语教学学会，未经许可不得转载</li>
+        <li>Copyright 1999-2013 All rights reserved</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

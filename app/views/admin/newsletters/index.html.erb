@@ -1,0 +1,42 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>通讯列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_newsletter_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>位置</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"><%= chaos_paginate @newsletters %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @newsletters.each do |newsletter| %>
+      <tr>
+        <td><%= newsletter.name %></td>
+        <td><%= newsletter.position %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, newsletter]) %>
+          <%= chaos_button_to_edit edit_admin_newsletter_path(newsletter) %>
+          <%= chaos_button_to_destroy url_for([:admin, newsletter]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

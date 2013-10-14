@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Admin - Signin</title>
+  <%= stylesheet_link_tag 'admin/icomoon', 'admin/bootstrap', 'admin/font', 'admin/theme', 'admin/signin', :media => "all" %>
+  <%= javascript_include_tag 'admin/jquery', 'admin/jquery.placeholder', 'admin/jquery.query', 'admin/jquery-ui.effects', 'admin/signin' %>
+</head>
+<body>
+  <div id="chaos-signin-wrapper">
+    <div id="chaos-signin">
+      <h1>用户登录</h1>
+      <div class="chaos-signin-lock"><i class="icon-lock"></i></div>
+      <div id="chaos-signin-form">
+        <%= form_tag admin_signin_path, :method => :post, :class => 'chaos-form' do %>
+          <div class="chaos-form-row">
+            <div class="chaos-form-item large">
+              <%= text_field_tag :account, nil, :class => 'chaos-signin-account required', :placeholder => '账号' %>
+            </div>
+          </div>
+          <div class="chaos-form-row">
+            <div class="chaos-form-item large">
+              <%= password_field_tag :password, nil, :class => 'chaos-signin-password required', :placeholder => '密码' %>
+            </div>
+          </div>
+          <div id="chaos-signin-remember" class="chaos-form-row chaos-inset">
+            <ul class="chaos-form-list inline">
+              <li>
+                <input id="remember" type="checkbox" /> 
+                <label for="remember">记住我</label>
+              </li>
+            </ul>
+          </div>
+          <div class="chaos-form-row">
+            <input type="submit" value="登录" class="btn btn-success chaos-signin-button" />
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

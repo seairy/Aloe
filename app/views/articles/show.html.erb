@@ -1,0 +1,18 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="article-show">
+    <h1><%= @article.title %></h1>
+    <div class="property">
+      <ul>
+        <li>时间：<%= datetime_tag @article.displayed_at %></li>
+        <li>来源：<%= @article.source %></li>
+        <li>浏览量：<%= @article.views_count %></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <%= raw @article.content %>
+    </div>
+  </div>
+</div>
+<%= render 'side' %>

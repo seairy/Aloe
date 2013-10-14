@@ -1,0 +1,48 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>话题列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_topic_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>论坛</th>
+          <th>标题</th>
+          <th>作者</th>
+          <th>是否可见</th>
+          <th>是否精华</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="6"><%= chaos_paginate @topics %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @topics.each do |topic| %>
+      <tr>
+        <td><%= topic.forum.name %></td>
+        <td><%= topic.title.truncate(26) %></td>
+        <td><%= topic.author.truncate(5) %></td>
+        <td><%= styled_boolean_tag topic.visible? %></td>
+        <td><%= styled_boolean_tag topic.featured? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, topic]) %>
+          <%= chaos_button_to_edit edit_admin_topic_path(topic) %>
+          <%= chaos_button_to_destroy url_for([:admin, topic]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

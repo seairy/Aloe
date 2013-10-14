@@ -1,0 +1,48 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>图书列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_book_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>作者</th>
+          <th>出版社</th>
+          <th>是否可用</th>
+          <th>是否可购</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="6"><%= chaos_paginate @books %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <td><%= book.name.truncate(20) %></td>
+        <td><%= book.author.truncate(6) %></td>
+        <td><%= book.publisher.truncate(12) %></td>
+        <td><%= styled_boolean_tag book.available? %></td>
+        <td><%= styled_boolean_tag book.purchasable? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, book]) %>
+          <%= chaos_button_to_edit edit_admin_book_path(book) %>
+          <%= chaos_button_to_destroy url_for([:admin, book]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

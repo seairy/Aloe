@@ -1,0 +1,45 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>创建新权限</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @role, @permission], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @permission %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">角色</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= @role.name %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">Controller名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :controller_name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">Action名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :action_name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">认证方式</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= f.radio_button :allowed, true %> 允许</li>
+              <li><%= f.radio_button :allowed, false %> 禁止</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+      </div>
+    <% end %>
+  </div>
+</div>

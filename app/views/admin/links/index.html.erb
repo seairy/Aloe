@@ -1,0 +1,46 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>链接列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_link_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>URL</th>
+          <th>访问次数</th>
+          <th>是否精华</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5"><%= chaos_paginate @links %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @links.each do |link| %>
+      <tr>
+        <td><%= link.name.truncate(30) %></td>
+        <td><%= link_to link.url.truncate(25), link.url, target: '_blank' %></td>
+        <td><%= link.visits_count %></td>
+        <td><%= styled_boolean_tag link.featured? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, link]) %>
+          <%= chaos_button_to_edit edit_admin_link_path(link) %>
+          <%= chaos_button_to_destroy url_for([:admin, link]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

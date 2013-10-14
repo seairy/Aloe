@@ -1,0 +1,43 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>链接信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @link.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">URL</label>
+          <div class="chaos-form-item">
+            <span><%= link_to @link.url, @link.url, target: '_blank' %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">访问次数</label>
+          <div class="chaos-form-item">
+            <span><%= @link.visits_count %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否精华</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @link.featured? %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_link_path(@link) %>
+        <%= chaos_button_to_destroy url_for([:admin, @link]) %>
+        <%= chaos_button_to_list admin_links_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

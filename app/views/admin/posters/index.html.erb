@@ -1,0 +1,44 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>海报列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_poster_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>URL</th>
+          <th>是否启用</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"><%= chaos_paginate @posters %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @posters.each do |poster| %>
+      <tr>
+        <td><%= poster.title %></td>
+        <td><%= poster.url %></td>
+        <td><%= styled_boolean_tag poster.available? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, poster]) %>
+          <%= chaos_button_to_edit edit_admin_poster_path(poster) %>
+          <%= chaos_button_to_destroy url_for([:admin, poster]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

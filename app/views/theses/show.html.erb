@@ -1,0 +1,23 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="thesis-show">
+    <h1><%= @thesis.title %></h1>
+    <div class="image"></div>
+    <div class="property">
+      <ul>
+        <li><span>作者：</span><%= @thesis.author %></li>
+        <li><span>发表刊物：</span><%= @thesis.published_in %> 第<%= @thesis.volume %>期</li>
+        <li><span>关键词：</span><%= @thesis.keywords %></li>
+        <li><span>原文链接：</span><%= link_to '点此访问', @thesis.link %></li>
+        <li>
+          <span>摘要：</span>
+          <div class="abstract">
+            <%= raw @thesis.abstract %>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<%= render 'side' %>

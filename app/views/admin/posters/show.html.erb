@@ -1,0 +1,45 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>海报信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <span><%= @poster.title %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">图片</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= link_to image_tag(@poster.image.thumb.url, alt: @poster.title), @poster.image.url, target: '_blank' %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">URL</label>
+          <div class="chaos-form-item">
+            <span><%= @poster.url %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否启用</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @poster.available? %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_poster_path(@poster) %>
+        <%= chaos_button_to_destroy url_for([:admin, @poster]) %>
+        <%= chaos_button_to_list admin_posters_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

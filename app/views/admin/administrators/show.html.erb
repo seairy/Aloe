@@ -1,0 +1,49 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>用户信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">角色</label>
+          <div class="chaos-form-item">
+            <span><%= @administrator.role.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">账号</label>
+          <div class="chaos-form-item">
+            <span><%= @administrator.account %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">姓名</label>
+          <div class="chaos-form-item">
+            <span><%= @administrator.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否启用</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @administrator.available? %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">最后登录时间</label>
+          <div class="chaos-form-item">
+            <span><%= @administrator.last_signined_at %></span>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_administrator_path(@administrator) %>
+        <%= chaos_button_to_destroy url_for([:admin, @administrator]) %>
+        <%= chaos_button_to_list admin_administrators_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

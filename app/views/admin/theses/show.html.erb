@@ -1,0 +1,76 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>论文信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <span><%= @thesis.title %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">作者</label>
+          <div class="chaos-form-item">
+            <span><%= @thesis.author %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">图片</label>
+          <div class="chaos-form-item">
+            <span><%= @thesis.image.url %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">摘要</label>
+          <div class="chaos-form-item">
+            <span><%= @thesis.abstract %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">关键词</label>
+          <div class="chaos-form-item">
+            <span><%= @thesis.keywords %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">发表刊物</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= @thesis.published_in %></li>
+              <li>第<%= @thesis.volume %>期</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">发表日期</label>
+          <div class="chaos-form-item">
+            <span><%= date_tag @thesis.published_at %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">原文链接</label>
+          <div class="chaos-form-item">
+            <span><%= @thesis.link %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否精华</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= style_boolean_tag @thesis.featured? %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_thesis_path(@thesis) %>
+        <%= chaos_button_to_destroy url_for([:admin, @thesis]) %>
+        <%= chaos_button_to_list admin_theses_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

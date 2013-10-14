@@ -1,0 +1,81 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>角色信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @role.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">超级权限</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @role.omnipotent? %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">通用权限</label>
+          <div class="chaos-form-item large">
+            <ul class="chaos-form-list inline">
+            <li>创建<%= styled_boolean_tag @role.creatable? %></li>
+            <li>更新<%= styled_boolean_tag @role.updatable? %></li>
+            <li>查看列表<%= styled_boolean_tag @role.listable? %></li>
+            <li>查看信息<%= styled_boolean_tag @role.showable? %></li>
+            <li>删除<%= styled_boolean_tag @role.destroyable? %></li>
+            <li>搜索<%= styled_boolean_tag @role.searchable? %></li>
+            <li>其它操作<%= styled_boolean_tag @role.operatable? %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_role_path(@role) %>
+        <%= chaos_button_to name: '添加特殊权限', path: new_admin_role_permission_path(@role) %>
+        <%= chaos_button_to_destroy url_for([:admin, @role]) %>
+        <%= chaos_button_to_list admin_roles_path %>
+      </div>
+    <% end %>
+  </div>
+</div>  
+<div class="chaos-panel grid_8">  
+  <div class="chaos-panel-header">
+    <span>特殊权限列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>Controller名称</th>
+          <th>Action名称</th>
+          <th>认证方式</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"><div class=\"pagination-info\">共<%= @role.permissions.count %>条记录</div></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @role.permissions.each do |permission| %>
+      <tr>
+        <td><%= permission.controller_name %></td>
+        <td><%= permission.action_name %></td>
+        <td><%= permission_allowed_tag permission.allowed %></td>
+        <td>
+          <%= chaos_button_to_edit edit_admin_role_permission_path(@role, permission), style: 'list' %>
+          <%= chaos_button_to_destroy url_for([:admin, @role, permission]), style: 'list' %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

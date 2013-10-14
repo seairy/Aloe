@@ -1,0 +1,22 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="book-show">
+    <h1><%= @book.name %></h1>
+    <div class="image"></div>
+    <div class="property">
+      <ul>
+        <li>作者：<%= @book.author %></li>
+        <li>出版社：<%= @book.publisher %></li>
+        <li>分类：</li>
+        <li>出版日期：<%= @book.published_at %></li>
+        <li>ISBN：<%= @book.isbn %></li>
+        <li>价格：<%= book_currency_tag @book.currency %> <%= @book.price %></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="description">
+      <%= raw @book.description %>
+    </div>
+  </div>
+</div>
+<%= render 'side' %>

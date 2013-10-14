@@ -1,0 +1,11 @@
+<div id="side">
+  <div class="side-row current">
+    <%= link_to raw("&raquo; 全部"), articles_path %>
+  </div>
+  <% ArticleCategory.sorted.each do |category| %>
+  <div class="side-row current">
+    <%= link_to raw "&raquo; #{category.name}" %>
+  </div>
+  <% end %>
+  <%= side_favorites_tag %>
+</div>

@@ -1,0 +1,80 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>编辑论文信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @thesis], html: { class: 'chaos-form', multipart: true } do |f| %>
+      <%= render "shared/admin/error_messages", target: @thesis %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :title %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">作者</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :author %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">图片</label>
+          <div class="chaos-form-item">
+            <%= f.file_field :image %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">摘要</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :abstract %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">关键词</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :keywords %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">发表刊物</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :published_in %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">期刊号</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :volume %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">发表日期</label>
+          <div class="chaos-form-item">
+            <%= f.date_select :published_at %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">原文链接</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :link %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否精华</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= f.check_box :featured %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回论文信息', path: url_for([:admin, @thesis]) %>
+        <%= chaos_button_to_return '返回论文列表', path: admin_theses_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

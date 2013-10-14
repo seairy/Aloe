@@ -1,0 +1,36 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>角色列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>超级权限</th>
+          <th>通用权限（C/U/L/R/D/S/O）</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"><%= chaos_paginate @roles %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @roles.each do |role| %>
+      <tr>
+        <td><%= role.name %></td>
+        <td><%= styled_boolean_tag role.omnipotent? %></td>
+        <td><%= styled_boolean_tag role.creatable? %> <%= styled_boolean_tag role.updatable? %> <%= styled_boolean_tag role.listable? %> <%= styled_boolean_tag role.showable? %> <%= styled_boolean_tag role.destroyable? %> <%= styled_boolean_tag role.searchable? %> <%= styled_boolean_tag role.operatable? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, role]) %>
+          <%= chaos_button_to_edit edit_admin_role_path(role) %>
+          <%= chaos_button_to_destroy url_for([:admin, role]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

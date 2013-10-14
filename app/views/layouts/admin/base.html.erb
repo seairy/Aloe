@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<title>ISCLT ManagementSystem</title>
+	<%= stylesheet_link_tag 'admin/bootstrap', 'admin/font', 'admin/icomoon', 'admin/chaos', 'admin/icol16', 'admin/icol32', 'admin/jui/jquery.ui.all', 'admin/jquery-ui.custom', 'admin/uploadify', 'admin/theme', :media => "all" %>
+	<%= javascript_include_tag 'application', 'admin/jquery', 'admin/jquery.mousewheel', 'admin/jquery.placeholder', 'admin/jquery-ui', 'admin/jquery-ui.custom', 'admin/jquery-ui.touch-punch', 'admin/jquery.uploadify.js',  'admin/bootstrap', 'admin/chaos' %>
+</head>
+<body>
+	<div id="chaos-header" class="clearfix">
+		<div id="chaos-logo-container">
+			<div id="chaos-logo-wrap">
+				<h1><span>ISCLT</span>ManagementSystem</h1>
+			</div>
+		</div>
+		<div id="chaos-user-tools" class="clearfix">
+			<div id="chaos-user-notif" class="chaos-dropdown-menu">
+				<a href="#" data-toggle="dropdown" class="chaos-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
+				<span class="chaos-dropdown-notif">35</span>
+				<div class="chaos-dropdown-box">
+					<div class="chaos-dropdown-content">
+						<ul class="chaos-notifications">
+							<li class="read">
+								<a href="#">
+									<span class="message">Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="read">
+								<a href="#">
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="read">
+								<a href="#">
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="read">
+								<a href="#">
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="read">
+								<a href="#">
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+						</ul>
+						<div class="chaos-dropdown-viewall">
+							<a href="#">View All Notifications</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="chaos-user-message" class="chaos-dropdown-menu">
+				<a href="#" data-toggle="dropdown" class="chaos-dropdown-trigger"><i class="icon-envelope"></i></a>
+				<span class="chaos-dropdown-notif">35</span>
+				<div class="chaos-dropdown-box">
+					<div class="chaos-dropdown-content">
+						<ul class="chaos-messages">
+							<li class="read">
+								<a href="#">
+									<span class="sender">John Doe</span>
+									<span class="message">Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="read">
+								<a href="#">
+									<span class="sender">John Doe</span>
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="unread">
+								<a href="#">
+									<span class="sender">John Doe</span>
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="unread">
+								<a href="#">
+									<span class="sender">John Doe</span>
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+							<li class="unread">
+								<a href="#">
+									<span class="sender">John Doe</span>
+									<span class="message">Lorem ipsum dolor sit amet</span>
+									<span class="time">January 21, 2012</span>
+								</a>
+							</li>
+						</ul>
+						<div class="chaos-dropdown-viewall">
+							<a href="#">View All Messages</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="chaos-user-info" class="chaos-inset">
+				<div id="chaos-user-photo"><%= image_tag 'admin/chaos-default-portrait.png' %></div>
+				<div id="chaos-user-functions">
+					<div id="chaos-account">欢迎您，<%= session[:administrator][:name]%></div>
+					<ul>
+						<li><%= link_to '我的账号' %></li>
+						<li><%= link_to '修改密码' %></li>
+						<li><%= link_to '退出', admin_signout_path %></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="chaos-wrapper">
+		<div id="chaos-sidebar-stitch"></div>
+		<div id="chaos-sidebar-bg"></div>
+		<div id="chaos-sidebar">
+			<div id="chaos-nav-collapse">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div id="chaos-navigation">
+				<ul>
+					<li class="active"><a href="#">控制面板</a></li>
+					<li>
+						<a href="#">数据管理</a>
+						<ul>
+							<li><%= link_to '数据统计', admin_data_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">文章管理</a>
+						<ul>
+							<li><%= link_to '文章列表', admin_articles_path %></li>
+							<li><%= link_to '添加文章', new_admin_article_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">海报管理</a>
+						<ul>
+							<li><%= link_to '海报列表', admin_posters_path %></li>
+							<li><%= link_to '添加海报', new_admin_poster_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">图书管理</a>
+						<ul>
+							<li><%= link_to '图书列表', admin_books_path %></li>
+							<li><%= link_to '添加图书', new_admin_book_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">教学资源管理</a>
+						<ul>
+							<li><%= link_to '教学资源列表', admin_resources_path %></li>
+							<li><%= link_to '添加教学资源', new_admin_resource_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">通讯管理</a>
+						<ul>
+							<li><%= link_to '通讯列表', admin_newsletters_path %></li>
+							<li><%= link_to '添加通讯', new_admin_newsletter_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">研讨会管理</a>
+						<ul>
+							<li><%= link_to '研讨会列表', admin_seminars_path %></li>
+							<li><%= link_to '添加研讨会', new_admin_seminar_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">论坛管理</a>
+						<ul>
+							<li><%= link_to '话题列表', admin_topics_path %></li>
+							<li><%= link_to '添加话题', new_admin_topic_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">论文管理</a>
+						<ul>
+							<li><%= link_to '论文列表', admin_theses_path %></li>
+							<li><%= link_to '添加论文', new_admin_thesis_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">链接管理</a>
+						<ul>
+							<li><%= link_to '链接列表', admin_links_path %></li>
+							<li><%= link_to '添加链接', new_admin_link_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">用户管理</a>
+						<ul>
+							<li><%= link_to '角色列表', admin_roles_path %></li>
+							<li><%= link_to '添加角色', new_admin_role_path %></li>
+							<li><%= link_to '用户列表', admin_administrators_path %></li>
+							<li><%= link_to '添加用户', new_admin_administrator_path %></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="chaos-container" class="clearfix">
+			<div class="container">
+				<%= yield %>
+			</div>
+			<div id="chaos-footer">Copyright ISCLT 2009-2013. All Rights Reserved.</div>
+		</div>
+	</div>
+</body>
+</html>

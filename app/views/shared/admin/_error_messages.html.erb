@@ -1,0 +1,10 @@
+<% if target.errors.any? %>
+    <div class="chaos-form-message error">
+        出现了 <%= target.errors.count %> 个错误！
+        <ul>
+            <% target.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

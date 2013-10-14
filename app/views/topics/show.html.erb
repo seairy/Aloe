@@ -1,0 +1,18 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="topic-show">
+    <h1><%= @topic.title %></h1>
+    <div class="property">
+      <ul>
+        <li>时间：<%= datetime_tag @topic.displayed_at %></li>
+        <li>作者：<%= @topic.author %></li>
+        <li>浏览量：<%= @topic.views_count %></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <%= raw @topic.content %>
+    </div>
+  </div>
+</div>
+<%= render 'side' %>

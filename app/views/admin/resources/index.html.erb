@@ -1,0 +1,48 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>教学资源列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_resource_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>分类</th>
+          <th>标题</th>
+          <th>作者</th>
+          <th>是否可见</th>
+          <th>是否精华</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="6"><%= chaos_paginate @resources %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @resources.each do |resource| %>
+      <tr>
+        <td><%= resource.category.name %></td>
+        <td><%= resource.title %></td>
+        <td><%= resource.author %></td>
+        <td><%= styled_boolean_tag resource.visible? %></td>
+        <td><%= styled_boolean_tag resource.featured? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, resource]) %>
+          <%= chaos_button_to_edit edit_admin_resource_path(resource) %>
+          <%= chaos_button_to_destroy url_for([:admin, resource]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

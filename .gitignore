@@ -1,6 +1,7 @@
 .DS_Store
 /.bundle
 /db/schema.rb
+/public/assets/*
 /log/*
 /tmp
 /test

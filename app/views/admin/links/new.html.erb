@@ -1,0 +1,37 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>创建新链接</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @link], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @link %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">URL</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :url %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否精华</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= f.check_box :featured, checked: true %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回链接列表', path: admin_links_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

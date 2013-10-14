@@ -1,0 +1,58 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>创建新海报</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @poster], html: { class: 'chaos-form', multipart: true } do |f| %>
+      <%= render "shared/admin/error_messages", target: @poster %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :title %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">图片</label>
+          <div class="chaos-form-item">
+            <%= f.file_field :image %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">关联资源</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= radio_button_tag :related_type, 1, false, onchange: 'selectPosterRelatedType()' %> 从文章中选择</li>
+              <li><%= radio_button_tag :related_type, 2, false, onchange: 'selectPosterRelatedType()' %> 自定义URL</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row related-type-article no-display">
+          <label class="chaos-form-label">关联文章</label>
+          <div class="chaos-form-item">
+            <%= f.collection_select :related_article_id, Article.latest.first(15), :id, :title %>
+          </div>
+        </div>
+        <div class="chaos-form-row related-type-none no-display">
+          <label class="chaos-form-label">自定义URL</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :url %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否启用</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= f.check_box :available, checked: true %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回海报列表', path: admin_posters_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

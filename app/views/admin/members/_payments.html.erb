@@ -1,0 +1,38 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>缴费记录</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>类型</th>
+          <th>金额</th>
+          <th>缴费日期</th>
+          <th>会费延长日期</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5"><%= chaos_button_to name: '会员缴费', path: target.individual? ? new_admin_individual_member_payment_path(target) : new_admin_organization_member_payment_path(target) %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% target.payments.each do |payment| %>
+      <tr>
+        <td><%= styled_boolean_tag payment.revenue?, true_value: '实际缴费', false_value: '学会赠与' %></td>
+        <td><%= payment.amount %>元</td>
+        <td><%= date_tag payment.paid_at %></td>
+        <td><%= date_tag payment.before_expired_at %> 至 <%= date_tag payment.extended_to %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, payment]) %>
+          <%= chaos_button_to_edit edit_admin_payment_path(payment), style: 'list' %>
+          <%= chaos_button_to_destroy url_for([:admin, payment]), style: 'list' %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

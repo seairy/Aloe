@@ -17,14 +17,22 @@ class Admin::DataController < Admin::BaseController
       seminar_thesis: SeminarThesis.all.count,
       seminar_article: SeminarArticle.all.count,
       seminar_photograph: SeminarPhotograph.all.count,
-      seminar_video: SeminarVideo.all.count }
+      seminar_video: SeminarVideo.all.count,
+      publication_category: PublicationCategory.all.count,
+      publication_article: PublicationArticle.all.count,
+      continent: Continent.all.count,
+      country: Country.all.count,
+      member: Member.all.count,
+      payment: Payment.all.count,
+      order: Order.all.count,
+      line_item: LineItem.all.count }
   end
   
   def migrate
     @connection = Mysql.init
     @connection.options(Mysql::SET_CHARSET_NAME, 'utf8')
     @connection.real_connect("localhost", "root", "", "isclt")
-    migrated_count = case params[:table_name]
+    migrated_count = case params[:model_name]
     when 'article' then migrate_articles
     when 'resource' then migrate_resources
     when 'topic' then migrate_topics
@@ -39,6 +47,37 @@ class Admin::DataController < Admin::BaseController
     when 'seminar_article' then migrate_seminar_articles
     when 'seminar_photograph' then migrate_seminar_photographs
     when 'seminar_video' then migrate_seminar_videos
+    when 'publication_category' then migrate_publication_categories
+    when 'publication_article' then migrate_publication_articles
+    when 'continent' then migrate_continents
+    when 'country' then migrate_countries
+    when 'member' then migrate_members
+    when 'payment' then migrate_payments
+    when 'order' then migrate_orders
+    when 'line_item' then migrate_line_items
+    when 'all'
+      count = migrate_articles
+      count += migrate_resources
+      count += migrate_topics
+      count += migrate_theses
+      count += migrate_books
+      count += migrate_book_shelves
+      count += migrate_links
+      count += migrate_newsletters
+      count += migrate_seminars
+      count += migrate_seminar_thesis_categories
+      count += migrate_seminar_theses
+      count += migrate_seminar_articles
+      count += migrate_seminar_photographs
+      count += migrate_seminar_videos
+      count += migrate_publication_categories
+      count += migrate_publication_articles
+      count += migrate_continents
+      count += migrate_countries
+      count += migrate_members
+      count += migrate_payments
+      count += migrate_orders
+      count += migrate_line_items
     end
     @connection.close
     flash[:notice] = "数据迁移成功！共迁移#{migrated_count}条！"
@@ -228,6 +267,150 @@ class Admin::DataController < Admin::BaseController
       seminar_video = SeminarVideo.create({ id: result['id'], seminar_id: result['seminar_id'], title: result['name'].force_encoding('utf-8'), description: result['description'].force_encoding('utf-8'), visible: result['visible'], created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
       seminar_video.update_column :image, image
       seminar_video.update_column :media, media
+    end
+    migrated_count
+  end
+  
+  def migrate_publication_categories
+    PublicationVolume.delete_all
+    PublicationCategory.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM publication_catalogs")
+    results.each_hash do |result|
+      migrated_count += 1
+      volume = PublicationVolume.where(publication_id: 1, name: result['issue'].force_encoding('utf-8')).first || PublicationVolume.create(publication_id: 1, name: result['issue'].force_encoding('utf-8'), featured: false)
+      PublicationCategory.create({ id: result['id'], volume_id: volume.id, name: result['name'].force_encoding('utf-8'), created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+    end
+    migrated_count
+  end
+  
+  def migrate_publication_articles
+    PublicationArticle.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM publications")
+    results.each_hash do |result|
+      migrated_count += 1
+      PublicationArticle.create({ id: result['id'], category_id: result['catalog_id'], title: result['title'].force_encoding('utf-8'), author: result['author'].force_encoding('utf-8'), organization: result['organization'].force_encoding('utf-8'), abstract: result['digest'].force_encoding('utf-8'), created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+    end
+    migrated_count
+  end
+  
+  def migrate_continents
+    Continent.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM continents")
+    results.each_hash do |result|
+      migrated_count += 1
+      Continent.create({ id: result['id'], name: result['name'].force_encoding('utf-8'), created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+    end
+    migrated_count
+  end
+  
+  def migrate_countries
+    Country.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM countries")
+    results.each_hash do |result|
+      migrated_count += 1
+      Country.create({ id: result['id'], continent_id: result['continent_id'], name: result['name'].force_encoding('utf-8'), created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+    end
+    migrated_count
+  end
+  
+  def migrate_members
+    Recipient.delete_all
+    Contact.delete_all
+    Member.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM members")
+    results.each_hash do |result|
+      if result['type'].force_encoding('utf-8') == 'IndividualMember' and result['approved'] == '1'
+        migrated_count += 1
+        foreign_name = result['foreign_name'].blank? ? '' : result['foreign_name'].force_encoding('utf-8')
+        province = result['province'].blank? ? '' : result['province'].force_encoding('utf-8')
+        address = result['address'].blank? ? '' : result['address'].force_encoding('utf-8')
+        resume = result['resume'].blank? ? '' : result['resume'].force_encoding('utf-8')
+        organization_name = result['organization_name'].blank? ? '' : result['organization_name'].force_encoding('utf-8')
+        dispatched_organization_name = result['dispatched_organization_name'].blank? ? '' : result['dispatched_organization_name'].force_encoding('utf-8')
+        president_of_ci = result['is_president_of_ci'].nil? ? false : result['is_president_of_ci']
+        comment = result['comment'].blank? ? '' : result['comment'].force_encoding('utf-8')
+        member = Member.create({ id: result['id'], type: 'IndividualMember', account: result['account'].force_encoding('utf-8'), hashed_password: result['hashed_password'].force_encoding('utf-8'), chinese_name: result['chinese_name'].force_encoding('utf-8'), foreign_name: foreign_name, country_id: result['country_id'], province: province, address: address, description: resume, degree: result['academic_degree'], organization_name: organization_name, dispatched_organization_name: dispatched_organization_name, president_of_ci: president_of_ci, public: true, remark: comment, balance: result['balance'], approved: result['approved'], permanent: result['permanent'], joined_at: result['joined_at'], expired_at: result['expired_at'], current_signined_at: result['last_signined_at'], last_signined_at: result['last_signined_at'], created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+        title = result['title'].blank? ? '' : result['title'].force_encoding('utf-8')
+        phone = result['phone'].blank? ? '' : result['phone'].force_encoding('utf-8')
+        mobile = result['mobile'].blank? ? '' : result['mobile'].force_encoding('utf-8')
+        fax = result['fax'].blank? ? '' : result['fax'].force_encoding('utf-8')
+        contact = member.contacts.create({ gender: result['gender'], title: title, phone: phone, mobile: mobile, fax: fax }, without_protection: true)
+        member.recipients.create( name: result['email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['email'] != nil and result['email'] != ''
+        member.recipients.create( name: result['spare_email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['spare_email'] != nil and result['spare_email'] != ''
+      elsif result['type'].force_encoding('utf-8') == 'OrganizationMember' and result['approved'] == '1'
+        migrated_count += 1
+        foreign_name = result['foreign_name'].blank? ? '' : result['foreign_name'].force_encoding('utf-8')
+        province = result['province'].blank? ? '' : result['province'].force_encoding('utf-8')
+        address = result['address'].blank? ? '' : result['address'].force_encoding('utf-8')
+        introduction = result['introduction'].blank? ? '' : result['introduction'].force_encoding('utf-8')
+        profit = result['organization_nature'] == '1' ? true : false
+        website = result['website'].blank? ? '' : result['website'].force_encoding('utf-8')
+        comment = result['comment'].blank? ? '' : result['comment'].force_encoding('utf-8')
+        member = Member.create({ id: result['id'], type: 'OrganizationMember', account: result['account'].force_encoding('utf-8'), hashed_password: result['hashed_password'].force_encoding('utf-8'), chinese_name: result['chinese_name'].force_encoding('utf-8'), foreign_name: foreign_name, country_id: result['country_id'], province: province, address: address, description: introduction, organization_type: result['organization_type'], profit: profit, website: website, public: true, remark: comment, balance: result['balance'], approved: result['approved'], permanent: result['permanent'], joined_at: result['joined_at'], expired_at: result['expired_at'], current_signined_at: result['last_signined_at'], last_signined_at: result['last_signined_at'], created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+        member.recipients.create( name: result['email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['email'] != nil and result['email'] != ''
+        member.recipients.create( name: result['spare_email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['spare_email'] != nil and result['spare_email'] != ''
+        contact = nil
+        if result['responsible_person_name'] != nil and result['responsible_person_name'] != ''
+          title = result['responsible_person_title'].blank? ? '' : result['responsible_person_title'].force_encoding('utf-8')
+          phone = result['responsible_person_phone'].blank? ? '' : result['responsible_person_phone'].force_encoding('utf-8')
+          mobile = result['responsible_person_mobile'].blank? ? '' : result['responsible_person_mobile'].force_encoding('utf-8')
+          fax = result['responsible_person_fax'].blank? ? '' : result['responsible_person_fax'].force_encoding('utf-8')
+          contact = member.contacts.create({ name: result['responsible_person_name'].force_encoding('utf-8'), title: title, phone: phone, mobile: mobile, fax: fax }, without_protection: true)
+          member.recipients.create( name: result['responsible_person_email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['responsible_person_email'] != nil and result['responsible_person_email'] != ''
+          member.recipients.create( name: result['responsible_person_spare_email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['responsible_person_spare_email'] != nil and result['responsible_person_spare_email'] != ''
+        end
+        if result['contact_person_name'] != nil and result['contact_person_name'] != ''
+          title = result['contact_person_title'].blank? ? '' : result['contact_person_title'].force_encoding('utf-8')
+          phone = result['contact_person_phone'].blank? ? '' : result['contact_person_phone'].force_encoding('utf-8')
+          mobile = result['contact_person_mobile'].blank? ? '' : result['contact_person_mobile'].force_encoding('utf-8')
+          fax = result['contact_person_fax'].blank? ? '' : result['contact_person_fax'].force_encoding('utf-8')
+          contact = member.contacts.create({ name: result['contact_person_name'].force_encoding('utf-8'), title: title, phone: phone, mobile: mobile, fax: fax }, without_protection: true)
+          member.recipients.create( name: result['contact_person_email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['contact_person_email'] != nil and result['contact_person_email'] != ''
+          member.recipients.create( name: result['contact_person_spare_email'].force_encoding('utf-8'), available: true, subscribed: true ) if result['contact_person_spare_email'] != nil and result['contact_person_spare_email'] != ''
+        end
+      end
+    end
+    migrated_count
+  end
+  
+  def migrate_payments
+    Payment.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM payments")
+    results.each_hash do |result|
+      migrated_count += 1
+      revenue = result['private'].to_i == 0 ? true : false
+      remark = result['remarks'].blank? ? '' : result['remarks'].force_encoding('utf-8')
+      Payment.create({ id: result['id'], member_id: result['member_id'], revenue: revenue, amount: result['amount'], paid_at: result['paid_at'], before_expired_at: result['expired_at'], extended_to: result['extended_at'], remark: remark, created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+    end
+    migrated_count
+  end
+  
+  def migrate_orders
+    Order.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM orders")
+    results.each_hash do |result|
+      migrated_count += 1
+      name = result['chinese_name'] || result['foreign_name']
+      address = result['chinese_address'] || result['foreign_address']
+      Order.create({ id: result['id'], member_id: result['member_id'], name: name.force_encoding('utf-8'), address: address.force_encoding('utf-8'), postal_code: result['postal_code'].force_encoding('utf-8'), phone: result['phone'].force_encoding('utf-8'), mobile: result['mobile'].force_encoding('utf-8'), total_price: result['total_price'], status: result['status'], remark: result['remarks'].force_encoding('utf-8'), created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
+    end
+    migrated_count
+  end
+  
+  def migrate_line_items
+    LineItem.delete_all
+    migrated_count = 0
+    results = @connection.query("SELECT * FROM line_items")
+    results.each_hash do |result|
+      migrated_count += 1
+      LineItem.create({ id: result['id'], order_id: result['order_id'], book_id: result['book_id'], price: result['price'], amount: result['amount'], created_at: result['created_at'], updated_at: result['updated_at'] }, without_protection: true)
     end
     migrated_count
   end

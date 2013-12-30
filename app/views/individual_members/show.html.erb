@@ -1,0 +1,126 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="member-show">
+    <h1>通讯录 - 会员信息</h1>
+    <div class="form form-member">
+      <fieldset>
+        <legend>基本信息</legend>
+        <div class="form-row">
+          <label class="form-label">中文姓名：</label>
+          <div class="form-item">
+            <%= @member.chinese_name %>
+          </div>
+        </div>
+        <% unless @member.foreign_name.blank? %>
+        <div class="form-row">
+          <label class="form-label">外文姓名：</label>
+          <div class="form-item">
+            <%= @member.foreign_name %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.contacts.first.gender == Contact::GenderUnknown %>
+        <div class="form-row">
+          <label class="form-label">性别：</label>
+          <div class="form-item">
+            <%= contact_gender_tag @member.contacts.first.gender %>
+          </div>
+        </div>
+        <% end %>
+        <div class="form-row">
+          <label class="form-label">国家/地区：</label>
+          <div class="form-item">
+            <%= @member.country.name %>
+          </div>
+        </div>
+        <% unless @member.degree.blank? %>
+        <div class="form-row">
+          <label class="form-label">学位：</label>
+          <div class="form-item">
+            <%= member_degree_tag @member.degree %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.contacts.first.title.blank? %>
+        <div class="form-row">
+          <label class="form-label">职务/职称：</label>
+          <div class="form-item">
+            <%= @member.contacts.first.title %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.organization_name.blank? %>
+        <div class="form-row">
+          <label class="form-label">工作单位：</label>
+          <div class="form-item">
+            <%= @member.organization_name %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.dispatched_organization_name.blank? %>
+        <div class="form-row">
+          <label class="form-label">派出单位：</label>
+          <div class="form-item">
+            <%= @member.dispatched_organization_name %>
+          </div>
+        </div>
+        <% end %>
+      </fieldset>
+      <fieldset>
+        <legend>联系信息</legend>
+        <% unless @member.province.blank? %>
+        <div class="form-row">
+          <label class="form-label">省/市：</label>
+          <div class="form-item">
+            <%= @member.province %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.address.blank? %>
+        <div class="form-row">
+          <label class="form-label">地址：</label>
+          <div class="form-item">
+            <%= @member.address %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.postal_code.blank? %>
+        <div class="form-row">
+          <label class="form-label">邮编：</label>
+          <div class="form-item">
+            <%= @member.postal_code %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.contacts.first.phone.blank? %>
+        <div class="form-row">
+          <label class="form-label">电话（座机）：</label>
+          <div class="form-item">
+            <%= @member.contacts.first.phone %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.contacts.first.mobile.blank? %>
+        <div class="form-row">
+          <label class="form-label">电话（移动）：</label>
+          <div class="form-item">
+            <%= @member.contacts.first.mobile %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.contacts.first.fax.blank? %>
+        <div class="form-row">
+          <label class="form-label">传真：</label>
+          <div class="form-item">
+            <%= @member.contacts.first.fax %>
+          </div>
+        </div>
+        <% end %>
+      </fieldset>
+      <div class="form-action">
+        <%= link_to '返回', @member.country, class: 'btn-blue' %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render '/services/side' %>

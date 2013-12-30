@@ -1,0 +1,19 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="newsletter-list">
+    <ul>
+      <% @newsletters.each do |newsletter| %>
+      <li>
+        <div class="image"><%= link_to image_tag(newsletter.image.url), newsletter.asset_url %></div>
+        <div class="property">
+          <h2><%= link_to newsletter.name, newsletter.asset_url %></h2>
+          <div class="description"><%= raw newsletter.description %></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+      <% end %>
+    </ul>
+    <div class="pagination"><%= will_paginate @newsletters %></div>
+  </div>
+</div>
+<%= render '/newsletters/side' %>

@@ -1,0 +1,12 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="continent-show">
+    <h1>通讯录 - <%= @continent.name %></h1>
+    <ul>
+      <% @continent.countries.available.each do |country| %>
+      <li><%= link_to country.name, country %><span><%= country.members.count %>人</span></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%= render '/services/side' %>

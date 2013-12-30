@@ -12,3 +12,4 @@ BookCategory.create(name: '文化').children.create([{ name: '影视作品' }, {
 BookCategory.create([{ name: '工具书' }, { name: '期刊杂志' }])
 ResourceCategory.create([{ name: '课件', position: 1, default: true }, { name: '教案', position: 2 }, { name: '示范课', position: 3 }])
 Forum.create([{ name: '国别调研', position: 1 }, { name: '教学互动', position: 2 }, { name: '案例交流', position: 3 }, { name: '学术探讨', position: 4 }, { name: '随感杂谈', position: 5 }, { name: '成果交流', position: 6 }])
+Publication.create(name: '世界汉语教学', position: 1)

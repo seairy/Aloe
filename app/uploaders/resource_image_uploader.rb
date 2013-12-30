@@ -1,8 +1,7 @@
-# encoding: utf-8
-
+# -*- encoding : utf-8 -*-
 class ResourceImageUploader < BaseUploader
   
   version :thumb do
-    process :resize_to_fit => [200, 200]
+    process :resize_to_fit => [200, 150]
   end
 end

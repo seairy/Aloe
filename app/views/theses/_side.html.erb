@@ -1,8 +1,25 @@
 <div id="side">
-  <% 2013.downto(2006).each do |year| %>
-  <div class="side-row">
-    <%= link_to "#{year}年" %>
-  </div>
+  <% if current_page?(controller: 'theses', action: 'index') and params[:year].blank? %>
+    <div class="side-row current">
+      <%= link_to raw("&raquo; 全部"), theses_path %>
+    </div>
+  <% else %>
+    <div class="side-row">
+      <%= link_to raw("&raquo; 全部"), theses_path %>
+    </div>
   <% end %>
-  <%= side_favorites_tag %>
+  <% 2013.downto(2006).each do |year| %>
+  <% if side_thesis_current? year %>
+    <div class="side-row current">
+      <%= link_to raw("&raquo; #{year}年"), "/theses/year/#{year}" %>
+    </div>
+  <% else %>
+    <div class="side-row">
+      <%= link_to raw("&raquo; #{year}年"), "/theses/year/#{year}" %>
+    </div>
+  <% end %>
+  <% end %>
+  <div class="side-row">
+    <%= link_to raw("&raquo; 更多") %>
+  </div>
 </div>

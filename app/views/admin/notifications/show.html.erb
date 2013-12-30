@@ -1,0 +1,34 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>通知信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <span><%= @notification.title %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">内容</label>
+          <div class="chaos-form-item">
+            <span><%= raw @notification.content %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">时间</label>
+          <div class="chaos-form-item">
+            <span><%= datetime_tag @notification.created_at %></span>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_destroy url_for([:admin, @notification]) %>
+        <%= chaos_button_to_list admin_notifications_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

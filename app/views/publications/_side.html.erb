@@ -1,0 +1,22 @@
+<div id="side">
+  <% if current_page? controller: 'publication_volumes', action: 'index', publication_id: nil %>
+  <div class="side-row current">
+    <%= link_to raw("&raquo; 全部"), publication_volumes_path %>
+  </div>
+  <% else %>
+  <div class="side-row">
+    <%= link_to raw("&raquo; 全部"), publication_volumes_path %>
+  </div>
+  <% end %>
+  <% Publication.all.each do |publication| %>
+  <% if side_publication_current? publication %>
+  <div class="side-row current">
+    <%= link_to raw("&raquo; 《#{publication.name}》"), publication_publication_volumes_path(publication) %>
+  </div>
+  <% else %>
+  <div class="side-row">
+    <%= link_to raw("&raquo; 《#{publication.name}》"), publication_publication_volumes_path(publication) %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

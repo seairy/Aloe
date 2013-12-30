@@ -13,6 +13,12 @@
           </div>
         </div>
         <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">图片</label>
+          <div class="chaos-form-item">
+            <span><%= chaos_image_tag @article.image.thumb %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
           <label class="chaos-form-label">标题</label>
           <div class="chaos-form-item">
             <span><%= @article.title %></span>

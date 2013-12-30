@@ -1,0 +1,15 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="seminar-article-list">
+    <ul>
+      <% @seminar_articles.each do |seminar_article| %>
+      <li>
+        <h2><%= link_to seminar_article.title.truncate(36), seminar_article_path(@seminar, seminar_article) %><span><%= date_tag seminar_article.displayed_at %></span></h2>
+        <div class="content"><%= indent_tag seminar_article.content.strip_tags.strip.truncate(150) %></div>
+      </li>
+      <% end %>
+    </ul>
+    <div class="pagination"><%= will_paginate @seminar_articles %></div>
+  </div>
+</div>
+<%= render '/seminars/side' %>

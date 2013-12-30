@@ -1,0 +1,123 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="member-edit">
+    <h1>修改信息</h1>
+    <%= form_for @member, url: member_path do |f| %>
+      <div class="form form-member">
+        <fieldset>
+          <legend>基本信息</legend>
+          <div class="form-row">
+            <label class="form-label">账号：</label>
+            <div class="form-item">
+              <%= @member.account %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">中文姓名：</label>
+            <div class="form-item">
+              <%= f.text_field :chinese_name, class: 'text-field' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">外文姓名：</label>
+            <div class="form-item">
+              <%= f.text_field :foreign_name, class: 'text-field' %>
+            </div>
+          </div>
+          <%= fields_for :contact, @member.contacts.first do |c| %>
+          <div class="form-row">
+            <label class="form-label">性别：</label>
+            <div class="form-item">
+              <%= c.radio_button :gender, Contact::GenderMale %>男
+              <%= c.radio_button :gender, Contact::GenderFemale %>女
+            </div>
+          </div>
+          <% end %>
+          <div class="form-row">
+            <label class="form-label">国家/地区：</label>
+            <div class="form-item">
+              <%= f.grouped_collection_select(:country_id, Continent.all, :countries, :name, :id, :name) %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">学位：</label>
+            <div class="form-item">
+              <%= f.select :degree, member_degree_options %>
+            </div>
+          </div>
+          <%= fields_for :contact, @member.contacts.first do |c| %>
+          <div class="form-row">
+            <label class="form-label">职务/职称：</label>
+            <div class="form-item">
+              <%= c.text_field :title, class: 'text-field' %>
+            </div>
+          </div>
+          <% end %>
+          <div class="form-row">
+            <label class="form-label">工作单位：</label>
+            <div class="form-item">
+              <%= f.text_field :organization_name, class: 'text-field large' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">派出单位：</label>
+            <div class="form-item">
+              <%= f.text_field :dispatched_organization_name, class: 'text-field large' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">简介：</label>
+            <div class="form-item">
+              <%= f.kindeditor :description, allowFileManager: false, simple_mode: true, width: 400, minWidth: 400, height: 240 %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>联系信息</legend>
+          <div class="form-row">
+            <label class="form-label">省/市：</label>
+            <div class="form-item">
+              <%= f.text_field :province, class: 'text-field' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">地址：</label>
+            <div class="form-item">
+              <%= f.text_field :address, class: 'text-field large' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">邮编：</label>
+            <div class="form-item">
+              <%= f.text_field :postal_code, class: 'text-field small' %>
+            </div>
+          </div>
+          <%= fields_for :contact, @member.contacts.first do |c| %>
+          <div class="form-row">
+            <label class="form-label">电话（座机）：</label>
+            <div class="form-item">
+              <%= c.text_field :phone, class: 'text-field' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">电话（移动）：</label>
+            <div class="form-item">
+              <%= c.text_field :mobile, class: 'text-field' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">传真：</label>
+            <div class="form-item">
+              <%= c.text_field :fax, class: 'text-field' %>
+            </div>
+          </div>
+          <% end %>
+        </fieldset>
+        <div class="form-action">
+          <%= submit_tag '提交', :class => 'btn-blue' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= render '/services/side' %>

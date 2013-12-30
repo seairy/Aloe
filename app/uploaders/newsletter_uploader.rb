@@ -1,5 +1,4 @@
-# encoding: utf-8
-
+# -*- encoding : utf-8 -*-
 class NewsletterUploader < BaseUploader
   
   version :thumb do

@@ -1,0 +1,17 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="seminar-article-show">
+    <h1><%= @seminar_article.title %></h1>
+    <div class="property">
+      <ul>
+        <li>时间：<%= datetime_tag @seminar_article.displayed_at %></li>
+        <li>来源：<%= @seminar_article.source %></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <%= raw @seminar_article.content %>
+    </div>
+  </div>
+</div>
+<%= render '/seminars/side' %>

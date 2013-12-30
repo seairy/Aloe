@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSeminarTheses < ActiveRecord::Migration
   def change
     create_table :seminar_theses do |t|

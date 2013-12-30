@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
 class SeminarPhotograph < ActiveRecord::Base
-  # attr_accessible :title, :body
+  mount_uploader :image, SeminarPhotographUploader
+  belongs_to :seminar
 end

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SeminarThesis < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :category, class_name: 'SeminarThesisCategory'
 end

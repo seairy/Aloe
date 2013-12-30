@@ -37,7 +37,11 @@ class Admin::RolesController < Admin::BaseController
   
   def destroy
     @role = Role.find(params[:id])
-    @role.destroy
-    redirect_to admin_roles_path
+    if @role.administrators.blank?
+      @role.destroy
+      redirect_to admin_roles_path
+    else
+      redirect_to [:admin, @role], alert: '删除失败！请先清空该角色下所有的用户！'
+    end
   end
 end

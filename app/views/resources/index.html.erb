@@ -4,11 +4,13 @@
     <ul>
       <% @resources.each do |resource| %>
       <li>
-        <div class="image"></div>
+        <div class="image">
+          <%= link_to image_tag(resource.image.url), resource %>
+        </div>
         <div class="property">
           <h2><%= link_to resource.title.truncate(24), resource %><span><%= date_tag resource.displayed_at %></span></h2>
           <div class="category"><%= resource.category.name %></div>
-          <div class="description"><%= (strip_tags resource.description).strip.truncate(120) %></div>
+          <div class="description"><%= indent_tag resource.description.strip_tags.strip.truncate(120) %></div>
         </div>
         <div class="clear"></div>
       </li>
@@ -17,4 +19,4 @@
     <div class="pagination"><%= will_paginate @resources %></div>
   </div>
 </div>
-<%= render 'side' %>
+<%= render '/resources/side' %>

@@ -1,0 +1,108 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>订单信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">会员姓名/名称</label>
+          <div class="chaos-form-item">
+            <span><%= @order.member.chinese_name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">收货人</label>
+          <div class="chaos-form-item">
+            <span><%= @order.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">收货地址</label>
+          <div class="chaos-form-item">
+            <span><%= @order.address %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">邮政编码</label>
+          <div class="chaos-form-item">
+            <span><%= @order.postal_code %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（座机）</label>
+          <div class="chaos-form-item">
+            <span><%= @order.phone %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（手机）</label>
+          <div class="chaos-form-item">
+            <span><%= @order.mobile %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">总价</label>
+          <div class="chaos-form-item">
+            <span><%= @order.total_price %>元</span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">状态</label>
+          <div class="chaos-form-item">
+            <span><%= order_status_tag @order.status %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">备注</label>
+          <div class="chaos-form-item">
+            <span><%= raw @order.remark %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">下单时间</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= datetime_tag @order.created_at %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_order_path(@order) %>
+        <%= chaos_button_to name: '返回会员信息', path: url_for([:admin, @order.member]) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>订单图书列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>图书名称</th>
+          <th>数量</th>
+          <th>单价</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @order.line_items.each do |line_item| %>
+      <tr>
+        <td><%= link_to line_item.book.name, [:admin, line_item.book], target: '_blank' %></td>
+        <td><%= line_item.amount %>本</td>
+        <td><%= line_item.price %>元</td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

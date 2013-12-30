@@ -7,8 +7,8 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<title>ISCLT ManagementSystem</title>
-	<%= stylesheet_link_tag 'admin/bootstrap', 'admin/font', 'admin/icomoon', 'admin/chaos', 'admin/icol16', 'admin/icol32', 'admin/jui/jquery.ui.all', 'admin/jquery-ui.custom', 'admin/uploadify', 'admin/theme', :media => "all" %>
-	<%= javascript_include_tag 'application', 'admin/jquery', 'admin/jquery.mousewheel', 'admin/jquery.placeholder', 'admin/jquery-ui', 'admin/jquery-ui.custom', 'admin/jquery-ui.touch-punch', 'admin/jquery.uploadify.js',  'admin/bootstrap', 'admin/chaos' %>
+	<%= stylesheet_link_tag 'admin', :media => "all" %>
+	<%= javascript_include_tag 'admin' %>
 </head>
 <body>
 	<div id="chaos-header" class="clearfix">
@@ -20,54 +20,31 @@
 		<div id="chaos-user-tools" class="clearfix">
 			<div id="chaos-user-notif" class="chaos-dropdown-menu">
 				<a href="#" data-toggle="dropdown" class="chaos-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-				<span class="chaos-dropdown-notif">35</span>
+				<span class="chaos-dropdown-notif"><%= @unread_notifications_count %></span>
 				<div class="chaos-dropdown-box">
 					<div class="chaos-dropdown-content">
 						<ul class="chaos-notifications">
-							<li class="read">
-								<a href="#">
-									<span class="message">Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore</span>
-									<span class="time">January 21, 2012</span>
+						  <% @dropdown_notifications.each do |notification| %>
+							<li>
+								<a href="<%= url_for [:admin, notification] %>">
+									<span class="message"><%= notification.title %></span>
+									<span class="time"><%= notification.created_at %></span>
 								</a>
 							</li>
-							<li class="read">
-								<a href="#">
-									<span class="message">Lorem ipsum dolor sit amet</span>
-									<span class="time">January 21, 2012</span>
-								</a>
-							</li>
-							<li class="read">
-								<a href="#">
-									<span class="message">Lorem ipsum dolor sit amet</span>
-									<span class="time">January 21, 2012</span>
-								</a>
-							</li>
-							<li class="read">
-								<a href="#">
-									<span class="message">Lorem ipsum dolor sit amet</span>
-									<span class="time">January 21, 2012</span>
-								</a>
-							</li>
-							<li class="read">
-								<a href="#">
-									<span class="message">Lorem ipsum dolor sit amet</span>
-									<span class="time">January 21, 2012</span>
-								</a>
-							</li>
-						</ul>
+							<% end %>
 						<div class="chaos-dropdown-viewall">
-							<a href="#">View All Notifications</a>
+							<%= link_to '查看所有通知', admin_notifications_path %>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="chaos-user-message" class="chaos-dropdown-menu">
 				<a href="#" data-toggle="dropdown" class="chaos-dropdown-trigger"><i class="icon-envelope"></i></a>
-				<span class="chaos-dropdown-notif">35</span>
+				<span class="chaos-dropdown-notif">0</span>
 				<div class="chaos-dropdown-box">
 					<div class="chaos-dropdown-content">
 						<ul class="chaos-messages">
-							<li class="read">
+							<!--li class="read">
 								<a href="#">
 									<span class="sender">John Doe</span>
 									<span class="message">Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore</span>
@@ -101,10 +78,10 @@
 									<span class="message">Lorem ipsum dolor sit amet</span>
 									<span class="time">January 21, 2012</span>
 								</a>
-							</li>
+							</li-->
 						</ul>
 						<div class="chaos-dropdown-viewall">
-							<a href="#">View All Messages</a>
+							<a href="#">查看所有信息</a>
 						</div>
 					</div>
 				</div>
@@ -114,8 +91,8 @@
 				<div id="chaos-user-functions">
 					<div id="chaos-account">欢迎您，<%= session[:administrator][:name]%></div>
 					<ul>
-						<li><%= link_to '我的账号' %></li>
-						<li><%= link_to '修改密码' %></li>
+						<li><%= link_to '我的账号', edit_admin_profile_path %></li>
+						<li><%= link_to '修改密码', edit_password_admin_profile_path %></li>
 						<li><%= link_to '退出', admin_signout_path %></li>
 					</ul>
 				</div>
@@ -133,11 +110,15 @@
 			</div>
 			<div id="chaos-navigation">
 				<ul>
-					<li class="active"><a href="#">控制面板</a></li>
 					<li>
-						<a href="#">数据管理</a>
+					 <%= link_to '控制面板', admin_dashboard_path %>
+					</li>
+					<li>
+						<a href="#">会员管理</a>
 						<ul>
-							<li><%= link_to '数据统计', admin_data_path %></li>
+						  <li><%= link_to '会员列表', admin_members_path %></li>
+							<li><%= link_to '个人会员列表', admin_individual_members_path %></li>
+							<li><%= link_to '单位会员列表', admin_organization_members_path %></li>
 						</ul>
 					</li>
 					<li>
@@ -176,6 +157,13 @@
 						</ul>
 					</li>
 					<li>
+						<a href="#">刊物管理</a>
+						<ul>
+							<li><%= link_to '刊物列表', admin_publications_path %></li>
+							<li><%= link_to '添加刊物', new_admin_publication_path %></li>
+						</ul>
+					</li>
+					<li>
 						<a href="#">研讨会管理</a>
 						<ul>
 							<li><%= link_to '研讨会列表', admin_seminars_path %></li>
@@ -204,12 +192,27 @@
 						</ul>
 					</li>
 					<li>
+						<a href="#">邮件管理</a>
+						<ul>
+							<li><%= link_to '邮件信息', admin_mails_path %></li>
+						</ul>
+					</li>
+					<li>
 						<a href="#">用户管理</a>
 						<ul>
 							<li><%= link_to '角色列表', admin_roles_path %></li>
 							<li><%= link_to '添加角色', new_admin_role_path %></li>
 							<li><%= link_to '用户列表', admin_administrators_path %></li>
 							<li><%= link_to '添加用户', new_admin_administrator_path %></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">系统管理</a>
+						<ul>
+						  <li><%= link_to '测试工具', admin_tests_path %></li>
+						  <li><%= link_to '错误管理', admin_errors_path %></li>
+							<li><%= link_to '数据管理', admin_data_path %></li>
+							<li><%= link_to '资源管理', admin_assets_path %></li>
 						</ul>
 					</li>
 				</ul>

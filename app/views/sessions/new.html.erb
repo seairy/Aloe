@@ -1,0 +1,28 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="signin">
+    <h1>用户登录</h1>
+    <%= form_tag :action => 'create' do %>
+      <div class="form form-signin">
+        <div class="form-row">
+          <label class="form-label">账号：</label>
+          <div class="form-item">
+            <%= text_field_tag :account, nil, :class => 'text-field' %>
+          </div>
+          <div class="form-tip-invalid"><%= flash[:alert] %></div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">密码：</label>
+          <div class="form-item">
+            <%= password_field_tag :password, nil, :class => 'text-field' %>
+          </div>
+          <div class="form-tip-fp"><%= link_to raw("#{image_tag 'icon_im_blue.png'} 忘记密码？") %></div>
+        </div>
+        <div class="form-action">
+          <%= submit_tag '登录', :class => 'btn-blue' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= render '/sessions/side' %>

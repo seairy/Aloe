@@ -1,0 +1,32 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="member-list">
+    <h1>通讯录 - <%= @country.continent.name %> - <%= @country.name %></h1>
+    <table class="table-member">
+      <thead>
+        <tr>
+          <th>会员类型</th>
+          <th>中文姓名</th>
+          <th>是否公开信息</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5"><%= will_paginate @members %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @members.each do |member| %>
+      <tr>
+        <td><%= member.individual? ? '个人会员' : '单位会员' %></td>
+        <td><%= member.chinese_name %></td>
+        <td><%= member.public? ? '公开' : '不公开'%></td>
+        <td><%= link_to '查看', member %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%= render '/services/side' %>

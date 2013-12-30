@@ -1,11 +1,22 @@
 <div id="side">
+  <% if current_page? controller: 'articles', action: 'index' %>
   <div class="side-row current">
     <%= link_to raw("&raquo; 全部"), articles_path %>
   </div>
-  <% ArticleCategory.sorted.each do |category| %>
-  <div class="side-row current">
-    <%= link_to raw "&raquo; #{category.name}" %>
+  <% else %>
+  <div class="side-row">
+    <%= link_to raw("&raquo; 全部"), articles_path %>
   </div>
   <% end %>
-  <%= side_favorites_tag %>
+  <% ArticleCategory.sorted.each do |category| %>
+  <% if side_article_current? category %>
+    <div class="side-row current">
+      <%= link_to raw("&raquo; #{category.name}"), category %>
+    </div>
+  <% else %>
+    <div class="side-row">
+      <%= link_to raw("&raquo; #{category.name}"), category %>
+    </div>
+  <% end %>
+  <% end %>
 </div>

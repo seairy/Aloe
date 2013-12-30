@@ -1,11 +1,22 @@
 <div id="side">
+  <% if current_page? controller: 'resources', action: 'index' %>
+  <div class="side-row current">
+    <%= link_to raw("&raquo; 全部"), resources_path %>
+  </div>
+  <% else %>
   <div class="side-row">
     <%= link_to raw("&raquo; 全部"), resources_path %>
   </div>
-  <% ResourceCategory.sorted.each do |category| %>
-  <div class="side-row">
-    <%= link_to raw "&raquo; #{category.name}" %>
-  </div>
   <% end %>
-  <%= side_favorites_tag %>
+  <% ResourceCategory.sorted.each do |category| %>
+  <% if side_resource_current? category %>
+    <div class="side-row current">
+      <%= link_to raw("&raquo; #{category.name}"), category %>
+    </div>
+  <% else %>
+    <div class="side-row">
+      <%= link_to raw("&raquo; #{category.name}"), category %>
+    </div>
+  <% end %>
+  <% end %>
 </div>

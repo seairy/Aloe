@@ -1,0 +1,213 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>个人会员信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <fieldset class="chaos-form-inline">
+        <legend>基本信息</legend>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">ID</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.id %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">账号</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.account %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">中文姓名</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.chinese_name %></span>
+          </div>
+        </div>
+        <% unless @individual_member.foreign_name.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">外文姓名</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.foreign_name %></span>
+          </div>
+        </div>
+        <% end %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">性别</label>
+          <div class="chaos-form-item">
+            <span><%= contact_gender_tag @individual_member.contacts.first.gender %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">国家/地区</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.country.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">学位</label>
+          <div class="chaos-form-item">
+            <span><%= member_degree_tag @individual_member.degree %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">职务/职称</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.contacts.first.title %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">工作单位</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.organization_name %></span>
+          </div>
+        </div>
+        <% unless @individual_member.dispatched_organization_name.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">派出单位</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.dispatched_organization_name %></span>
+          </div>
+        </div>
+        <% end %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否为孔院院长</label>
+          <div class="chaos-form-item">
+            <span><%= styled_boolean_tag @individual_member.president_of_ci? %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否公开信息</label>
+          <div class="chaos-form-item">
+            <span><%= styled_boolean_tag @individual_member.public? %></span>
+          </div>
+        </div>
+        <% unless @individual_member.description.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">简介</label>
+          <div class="chaos-form-item">
+            <span><%= raw @individual_member.description %></span>
+          </div>
+        </div>
+        <% end %>
+      </fieldset>
+      <fieldset class="chaos-form-inline">
+        <legend>联系信息</legend>
+        <% unless @individual_member.province.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">省/市</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.province %></span>
+          </div>
+        </div>
+        <% end %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">地址</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.address %></span>
+          </div>
+        </div>
+        <% unless @individual_member.postal_code.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">邮编</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.postal_code %></span>
+          </div>
+        </div>
+        <% end %>
+        <% unless @individual_member.contacts.first.phone.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（座机）</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.contacts.first.phone %></span>
+          </div>
+        </div>
+        <% end %>
+        <% unless @individual_member.contacts.first.mobile.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（移动）</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.contacts.first.mobile %></span>
+          </div>
+        </div>
+        <% end %>
+        <% unless @individual_member.contacts.first.fax.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">传真</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.contacts.first.fax %></span>
+          </div>
+        </div>
+        <% end %>
+        <% @individual_member.recipients.each_with_index do |recipient, index| %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">邮箱<%= index + 1 if @individual_member.recipients.count > 1 %></label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= recipient.name %></li>
+              <li><%= styled_boolean_tag recipient.available?, true_value: '有效', false_value: '无效' %></li>
+              <li><%= styled_boolean_tag recipient.subscribed?, true_value: '已订阅', false_value: '已退订' %></li>
+              <li><%= chaos_button_to name: '删除', class: 'btn-danger', onclick: "redirectToDestroy('#{url_for([:admin, recipient])}')" %></li>
+            </ul>
+          </div>
+        </div>
+        <% end %>
+      </fieldset>
+      <fieldset class="chaos-form-inline">
+        <legend>管理信息</legend>
+        <% unless @individual_member.remark.blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">备注</label>
+          <div class="chaos-form-item">
+            <span><%= raw @individual_member.remark %></span>
+          </div>
+        </div>
+        <% end %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">余额</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.balance %>元</span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">正式会员</label>
+          <div class="chaos-form-item">
+            <span><%= styled_boolean_tag @individual_member.approved? %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">永久会员</label>
+          <div class="chaos-form-item">
+            <span><%= styled_boolean_tag @individual_member.permanent? %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">入会日期</label>
+          <div class="chaos-form-item">
+            <span><%= @individual_member.joined_at %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">会费有效期</label>
+          <div class="chaos-form-item">
+            <span><%= member_expired_at_tag @individual_member.expired_at %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">最后登录日期</label>
+          <div class="chaos-form-item">
+            <span><%= blank_tag @individual_member.last_signined_at, '从未登录' %></span>
+          </div>
+        </div>
+      </fieldset>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_individual_member_path(@individual_member) %>
+        <%= chaos_button_to name: '添加邮箱', path: new_admin_individual_member_recipient_path(@individual_member) %>
+        <%= chaos_button_to_list admin_individual_members_path %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= render "admin/members/payments", target: @individual_member %>
+<%= render "admin/members/orders", target: @individual_member %>

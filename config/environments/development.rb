@@ -36,6 +36,19 @@ Aloe::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
+  config.assets.compile = true
+  
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'mail.shihan.org.cn',
+    port:                 25,
+    domain:               'mail.shihan.org.cn',
+    user_name:            'shihanxuehui@shihan.org.cn',
+    password:             'shihanxuehui302',
+    authentication:       'login',
+    enable_starttls_auto: true
+  }
 end

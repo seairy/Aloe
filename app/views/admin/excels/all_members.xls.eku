@@ -1,0 +1,19 @@
+__filename = "#{Time.now.strftime '%y%m%d'}_全部会员.xls"
+
+bold = Spreadsheet::Format.new(:weight => :bold)
+
+i_sheet = xls.create_worksheet
+i_sheet.name = "个人会员"
+i_sheet.row(0).concat ["ID", "账号", "中文姓名", "外文姓名", "性别", "国家/地区", "学位", "职务/职称", "工作单位", "派出单位", "是否为孔院院长", "是否公开信息", "省/市", "地址", "邮编", "电话（座机）", "电话（移动）", "传真", "邮箱", "余额", "正式会员", "永久会员", "入会日期", "会费有效期", "最后登录日期"]
+@individual_members.each_with_index do |m, i|
+  i_sheet.update_row i + 1, m.id, m.account, m.chinese_name, m.foreign_name, contact_gender_tag(m.contacts.first.gender), m.country.name, member_degree_tag(m.degree), m.contacts.first.title, m.organization_name, m.dispatched_organization_name, boolean_tag(m.president_of_ci?), boolean_tag(m.public?), m.province, m.address, m.postal_code, m.contacts.first.phone, m.contacts.first.mobile, m.contacts.first.fax, m.recipients.map{|r| r.name}.join(' / '), m.balance, boolean_tag(m.approved?), boolean_tag(m.permanent?), m.joined_at, member_expired_at_tag(m.expired_at), blank_tag(m.last_signined_at, '从未登录')
+  i_sheet.row(0).default_format = bold
+end
+
+o_sheet = xls.create_worksheet
+o_sheet.name = "单位会员"
+o_sheet.row(0).concat ["ID", "账号", "中文姓名", "外文姓名", "国家/地区", "单位类型", "单位性质", "是否公开信息", "省/市", "地址", "邮编", "邮箱", "余额", "正式会员", "永久会员", "入会日期", "会费有效期", "最后登录日期"]
+@organization_members.each_with_index do |m, i|
+  o_sheet.update_row i + 1, m.id, m.account, m.chinese_name, m.foreign_name, m.country.name, member_organization_type_tag(m.organization_type), member_profit_tag(m.profit?), boolean_tag(m.public?), m.province, m.address, m.postal_code, m.recipients.map{|r| r.name}.join(' / '), m.balance, boolean_tag(m.approved?), boolean_tag(m.permanent?), m.joined_at, member_expired_at_tag(m.expired_at), blank_tag(m.last_signined_at, '从未登录')
+  o_sheet.row(0).default_format = bold
+end

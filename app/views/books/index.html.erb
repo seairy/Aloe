@@ -4,13 +4,15 @@
     <ul>
       <% @books.each do |book| %>
       <li>
-        <div class="image"></div>
+        <div class="image">
+          <%= image_tag book.image.url %>
+        </div>
         <div class="property">
           <h2><%= link_to book.name.truncate(24), book %></h2>
           <div class="author">作者：<span><%= book.author %></span></div>
           <div class="publisher">出版社：<span><%= book.publisher %></span></div>
           <div class="price">价格：<span><%= book_currency_tag book.currency %> <%= book.price %></span></div>
-          <div class="description"><%= (strip_tags book.description).strip.truncate(120) %></div>
+          <div class="description"><%= indent_tag book.description.strip_tags.strip.truncate(145) %></div>
         </div>
         <div class="clear"></div>
       </li>

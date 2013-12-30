@@ -1,0 +1,16 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="publication-list">
+    <ul>
+      <% @publications.each do |publication| %>
+      <li>
+        <h2><%= link_to "第#{publication.volume}期", "/publication_categories/volume/#{publication.volume}" %></h2>
+        <div class="abstract">
+          <%= indent_tag ("内容简介：" + publication.articles.map{|article| article.title}.join('，')).truncate(180) %>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%= render '/publications/side' %>

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Link < ActiveRecord::Base
-  # attr_accessible :title, :body
+  scope :sorted, order('featured DESC')
 end

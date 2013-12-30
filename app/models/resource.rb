@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Resource < ActiveRecord::Base
   MEDIA_TYPE_AUDIO, MEDIA_TYPE_VIDEO, MEDIA_TYPE_ANIMATION = 1, 2, 3
   mount_uploader :image, ResourceImageUploader

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SeminarVideo < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :seminar
 end

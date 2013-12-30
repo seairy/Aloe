@@ -43,7 +43,41 @@
       </div>
     <% end %>
   </div>
-</div>  
+</div>
+<div class="chaos-panel grid_8">  
+  <div class="chaos-panel-header">
+    <span>用户列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>账号</th>
+          <th>姓名</th>
+          <th>是否启用</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"><div class=\"pagination-info\">共<%= @role.administrators.count %>条记录</div></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @role.administrators.each do |administrator| %>
+      <tr>
+        <td><%= administrator.account %></td>
+        <td><%= administrator.name %></td>
+        <td><%= styled_boolean_tag administrator.available? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, administrator]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div class="chaos-panel grid_8">  
   <div class="chaos-panel-header">
     <span>特殊权限列表</span>

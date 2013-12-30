@@ -1,0 +1,24 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>测试工具</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-row bordered">
+        <label class="chaos-form-label">系统通知</label>
+        <div class="chaos-form-item">
+          <%= chaos_button_to name: '清除我的通知', path: clean_notifications_admin_tests_path %>
+          <%= chaos_button_to name: '发送10条通知给我', path: send_notifications_admin_tests_path(count: 10) %>
+          <%= chaos_button_to name: '发送50条通知给我', path: send_notifications_admin_tests_path(count: 50) %>
+        </div>
+      </div>
+      <div class="chaos-form-row bordered">
+        <label class="chaos-form-label">短消息</label>
+        <div class="chaos-form-item">
+          
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

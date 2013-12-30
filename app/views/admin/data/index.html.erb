@@ -1,28 +1,30 @@
 <div class="chaos-panel grid_8">
   <div class="chaos-panel-header">
-    <span>数据统计</span>
+    <span>数据管理</span>
   </div>
   <div class="chaos-panel-body no-padding">
     <%= flash_tag %>
     <table class="chaos-table">
       <thead>
         <tr>
-          <th>数据表</th>
+          <th>模型</th>
           <th>数据总量</th>
           <th class="action">操作</th>
         </tr>
       </thead>
       <tfoot>
         <tr>
-          <td colspan="3"></td>
+          <td colspan="3">
+            <%= chaos_button_to name: '<i class="icol-page-white-put"></i> 迁移全部数据', class: 'btn-small', path: migrate_admin_data_path(model_name: 'all') %>
+          </td>
         </tr>
       </tfoot>
       <tbody>
-      <% @statistics.each do |table_name, count| %>
+      <% @statistics.each do |model_name, count| %>
       <tr>
-        <td><%= table_name %></td>
+        <td><%= model_name %></td>
         <td><%= count %></td>
-        <td><%= chaos_button_to name: '<i class="icol-page-white-put"></i> 迁移', class: 'btn-small', path: migrate_admin_data_path(table_name: table_name) %></td>
+        <td><%= chaos_button_to name: '<i class="icol-page-white-put"></i> 旧数据迁移', class: 'btn-small', path: migrate_admin_data_path(model_name: model_name) %></td>
       </tr>
       <% end %>
       </tbody>

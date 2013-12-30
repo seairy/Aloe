@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateNewsletters < ActiveRecord::Migration
   def change
     create_table :newsletters do |t|

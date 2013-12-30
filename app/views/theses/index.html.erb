@@ -5,7 +5,7 @@
       <% @theses.each do |thesis| %>
       <li>
         <h2><%= link_to thesis.title.truncate(36), thesis %><span><%= thesis.author.truncate(8) %></span></h2>
-        <div class="abstract"><%= (strip_tags thesis.abstract).strip.truncate(180) %></div>
+        <div class="abstract"><%= indent_tag thesis.abstract.strip_tags.strip.truncate(180) %></div>
         <div class="publish"><%= thesis.published_in %> 第<%= thesis.volume %>期</div>
         <div class="clear"></div>
       </li>

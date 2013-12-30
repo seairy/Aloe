@@ -1,107 +1,160 @@
 <div id="main-home">
-  <div class="poster">
-    <%= image_tag 'poster_1.png', alt: 'TEST 1' %>
+  <div class="theme-bar">
+    <div id="poster" class="nivoSlider">
+      <%= link_to image_tag('poster-demo-1.png', title: '世汉网新版正式上线') %>
+      <%= link_to image_tag('poster-demo-4.png', title: '许嘉璐会长 新年致辞') %>
+      <%= link_to image_tag('poster-demo-2.png', title: '许嘉璐会长在研讨会上的讲话') %>
+      <%= link_to image_tag('poster-demo-3.png', title: '世界汉语教学学会 活动照片') %>
+    </div>
   </div>
+  <%= javascript_tag do %>
+  $(window).load(function() {
+		$('#poster').nivoSlider({
+		  effect: 'fade',
+		  pauseTime: 5000,
+      controlNav: false,
+      prevText: '上一张',
+      nextText: '下一张'
+		});
+	});
+  <% end %>
   <div class="news">
     <div class="left">
-      <h3>综合信息<%= link_to '更多' %></h3>
-      <div class="news-rich-row">
-        <label class="news-label"><%= link_to '标题标题标题标题标题标题标题标题标题标题' %><span>孔子学院</span></label>
-        <div class="news-content">
-          内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容...
-        </div>
+      <h3><%= link_to '综合信息', articles_path, target: '_blank'%><%= link_to '更多', articles_path, target: '_blank', class: 'more' %></h3>
+      <div id="article-slider" class="cxslider">
+        <div class="box">
+    			<ul class="list">
+    			  <% @imaged_articles.each do |article| %>
+    			  <li><a href="<%= url_for article %>" target="_blank">
+    					<%= image_tag article.image.thumb.url %>
+    					<div class="content">
+    					  <h4><%= article.title.truncate(15) %><span><%= article.category.name %></span></h4>
+    					  <div class="brief"><%= indent_tag article.content.strip_tags.strip.truncate(52) %></div>
+    					</div>
+    				</a></li>
+    			  <% end %>
+    			</ul>
+    		</div>
       </div>
-      <div class="news-rich-row">
-        <label class="news-label"><%= link_to '标题标题标题标题标题标题标题标题标题标题' %><span>孔子学院</span></label>
-        <div class="news-content">
-          内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容...
-        </div>
-      </div>
-      <div class="news-rich-row">
-        <label class="news-label"><%= link_to '标题标题标题标题标题标题标题标题标题标题' %><span>孔子学院</span></label>
-        <div class="news-content">
-          内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容...
-        </div>
-      </div>
+      <%= javascript_tag do %>
+        $("#article-slider").cxSlide({type:"fade", speed:300});
+      <% end %>
       <ul class="news-plain">
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
-        <li><%= link_to '标题标题标题标题标题标题标题标题' %><span>孔子学院</span></li>
+        <% @articles.each do |article| %>
+        <li><%= link_to article.title.truncate(28), article, target: '_blank' %><span><%= article.category.name %></span></li>
+        <% end %>
       </ul>
     </div>
     <div class="right">
-      <h3>交流互动<%= link_to '更多' %></h3>
+      <h3><%= link_to '交流互动', topics_path, target: '_blank' %><%= link_to '更多', topics_path, target: '_blank', class: 'more' %></h3>
       <ul class="news-plain">
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
+        <% @topics.each do |topic| %>
+        <li><%= link_to topic.title.truncate(14), topic, target: '_blank' %><span><%= topic.author[0..2] %></span></li>
+        <% end %>
       </ul>
-      <h3>世汉论坛<%= link_to '更多' %></h3>
+      <h3><%= link_to '世汉论坛', theses_path, target: '_blank' %><%= link_to '更多', theses_path, target: '_blank', class: 'more' %></h3>
       <ul class="news-plain">
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
-        <li><%= link_to '标题标题标题标题标题标题' %><span>某某某</span></li>
+        <% @theses.each do |thesis| %>
+        <li><%= link_to thesis.title.truncate(14), thesis, target: '_blank' %><span><%= thesis.author[0..2] %></span></li>
+        <% end %>
       </ul>
-      <h3>教学资源<%= link_to '更多' %></h3>
+      <h3><%= link_to '教学资源', resources_path, target: '_blank' %><%= link_to '更多', resources_path, target: '_blank', class: 'more' %></h3>
+      <div class="resource">
+        <div class="image">
+          <%= link_to image_tag(@resource.image.url), @resource, target: '_blank' %>
+        </div>
+        <div class="property">
+          <ul>
+            <li><%= link_to @resource.title, @resource, target: '_blank' %></li>
+            <li>作者：<%= @resource.author %></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="clear"></div>
   </div>
   <div class="book">
-    <h3>图书展示<%= link_to '更多' %></h3>
+    <h3><%= link_to '图书展示', books_path, target: '_blank' %><%= link_to '更多', books_path, target: '_blank', class: 'more' %></h3>
+    <div class="prev">
+      <%= link_to image_tag('icon_arrow_marquee_left.png'), nil, id: 'book-prev', class: 'control' %>
+    </div>
+    <div id="book-marquee" class="wrap">
+      <ul>
+        <% @books.each do |book| %>
+        <li><%= link_to default_image_tag(book.image, size: '105x150'), book, target: '_blank' %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="next">
+      <%= link_to image_tag('icon_arrow_marquee_right.png'), nil, id: 'book-next', class: 'control' %>
+    </div>
+    <%= javascript_tag do %>
+    $(function() {
+      $('#book-marquee').marquee({
+        auto: false,
+        speed: 1000,
+        showNum: 3,
+        stepLen: 3,
+        prevElement: $('#book-prev'),
+        nextElement: $('#book-next')
+      });
+    })
+    <% end %>
+    <div class="clear"></div>
+  </div>
+  <div class="magazine">
+    <h3><%= link_to '期刊杂志', publication_volumes_path, target: '_blank' %><%= link_to '更多', publication_volumes_path, target: '_blank', class: 'more' %></h3>
     <ul>
-      <li><%= link_to image_tag('book-demo.png') %></li>
-      <li><%= link_to image_tag('book-demo.png') %></li>
-      <li><%= link_to image_tag('book-demo.png') %></li>
-      <li><%= link_to image_tag('book-demo.png') %></li>
-      <li><%= link_to image_tag('book-demo.png') %></li>
+      <% @publication_volumes.each do |publication_volumes| %>
+      <li><%= link_to default_image_tag(publication_volumes.image, size: '105x150'), publication_volumes, target: '_blank' %></li>
+      <% end %>
     </ul>
   </div>
+  <div class="clear"></div>
 </div>
 <div id="side" class="home-side">
-  <div class="side-row">
-    搜索
+  <div class="side-row side-newsletter center bold">
+    <%= link_to image_tag(@newsletter.image.url, alt: @newsletter.name), newsletters_path %>
   </div>
-  <div class="side-row">
-    通讯
+  <div class="side-row side-contributions">
+    <h3>征稿启事</h3>
+    <p>　　承蒙广大会员和读者的厚爱和支持，网站和《世界汉语教学学会通讯》受到广泛的关注和好评。为了更加及时地反映国际汉语教学动态，我们将不断丰富刊物内容，为广大会员和一线教师搭建更好的交流平台。诚挚邀请世界汉语教学学会会员和业内人士踊跃投稿！</p>
+    <p class="email"><%= link_to 'shihanxuehui@hanban.org', 'mailto:shihanxuehui@hanban.org'%></p>
+
   </div>
-  <div class="side-row">
-    通讯
+  <%= side_favorites_tag %>
+  <div class="side-row side-list">
+    <h3>友情链接<%= link_to '更多', links_path %></h3>
+    <ul>
+      <% @links.each do |link| %>
+      <li><%= link_to link.name, link.url, target: '_blank' %></li>
+      <% end %>
+    </ul>
   </div>
-  <div class="side-row">
-    通讯
-  </div>
-  <div class="side-row">
-    通讯
-  </div>
-  <div class="side-row">
-    通讯
-  </div>
-  <div class="side-row">
-    通讯
-  </div>
-  <div class="side-row">
-    通讯
-  </div>
-  <div class="side-row">
-    通讯
-  </div>
-  <div class="side-row last">
-    通讯
+  <div class="side-row side-list side-member last">
+    <h3>单位会员<%= link_to '更多', links_path %></h3>
+    <ul id="side-member">
+      <% @organization_members.each do |organization_member| %>
+      <li><%= link_to organization_member.chinese_name.truncate(14), "http://#{organization_member.website}", target: '_blank' %></li>
+      <% end %>
+    </ul>
+    <%= javascript_tag do %>
+    $(function(){
+    	var _wrap=$('#side-member');
+    	var _interval=2000;
+    	var _moving;
+    	_wrap.hover(function(){
+    		clearInterval(_moving);
+    	},function(){
+    		_moving=setInterval(function(){
+    			var _field=_wrap.find('li:first');
+    			var _h=_field.height();
+    			_field.animate({marginTop:-_h+'px'},600,function(){
+    				_field.css('marginTop',0).appendTo(_wrap);
+    			})
+    		},_interval)
+    	}).trigger('mouseleave');
+    });
+    <% end %>
   </div>
 </div>

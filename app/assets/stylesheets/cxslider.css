@@ -1,0 +1,77 @@
+.cxslider {
+	overflow: hidden;
+	position: relative;
+	margin-top: 12px;
+	padding-bottom: 6px;
+	width: 444px;
+	height: 90px;
+	border-bottom: 1px #d8d8d8 dashed;
+}
+.cxslider .box {
+	overflow: hidden;
+	position: relative;
+	z-index: 4;
+}
+.cxslider .box a:hover {
+	text-decoration: none;
+}
+.cxslider .list {
+	overflow: hidden;
+	height: 90px;
+}
+.cxslider .list li {
+	position: relative;
+	width: 444px;
+	height: 90px;
+}
+.cxslider .list li img {
+	float: left;
+	padding: 1px;
+	width: 120px;
+	height: 80px;
+	border: 1px #ccc solid;
+}
+.cxslider .list li div.content {
+	position: absolute;
+	top: 0;
+	left: 134px;
+	width: 310px;
+}
+.cxslider .list li div.content h4 {
+	font: 16px 'Microsoft Yahei';
+	font-weight: bold;
+}
+.cxslider .list li div.content h4 span {
+	float: right;
+	line-height: 16px;
+	font-size: 12px;
+	font-weight: normal;
+	color: #8bafc7;
+}
+.cxslider .list li div.content .brief {
+	margin-top: 6px;
+	line-height: 18px;
+}
+.cxslider .btn {
+	overflow: hidden;
+	position: absolute;
+	bottom: 12px;
+	right: 6px;
+	z-index: 10;
+}
+.cxslider .btn li {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin: 0 0 0 10px;
+	border-radius: 2px;
+	background: #eee;
+	color: #333;
+	font: 11px/16px Tahoma;
+	text-align: center;
+	cursor: pointer;
+}
+.cxslider .btn .selected {
+	background: #f30;
+	color: #fff;
+}

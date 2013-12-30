@@ -1,0 +1,67 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>刊物信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @publication.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">简介</label>
+          <div class="chaos-form-item">
+            <span><%= raw @publication.description %></span>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_publication_path(@publication) %>
+        <%= chaos_button_to_destroy url_for([:admin, @publication]) %>
+        <%= chaos_button_to name: '添加期刊', path: new_admin_publication_publication_volume_path(@publication) %>
+        <%= chaos_button_to_list admin_publications_path %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>期刊列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>预览图</th>
+          <th>名称</th>
+          <th>文章数量</th>
+          <th>是否精华</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5"></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @publication.volumes.sorted_by_name.each do |publication_volume| %>
+      <tr>
+        <td><%= chaos_image_tag publication_volume.image.thumb, size: '105x150', border: true %></td>
+        <td>第<%= publication_volume.name %>期</td>
+        <td><%= publication_volume.categories.inject(0){|count, category| count + category.articles.count} %></td>
+        <td><%= styled_boolean_tag publication_volume.featured? %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, publication_volume]) %>
+          <%= chaos_button_to_edit edit_admin_publication_volume_path(publication_volume) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

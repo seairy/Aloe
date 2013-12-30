@@ -1,7 +1,9 @@
+# -*- encoding : utf-8 -*-
 class CreateArticles < ActiveRecord::Migration
   def change
     create_table :articles do |t|
       t.references :category, :null => false
+      t.string :image, :limit => 500
       t.string :title, :source, :limit => 200
       t.text :content
       t.boolean :visible, :featured, :null => false

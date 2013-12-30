@@ -1,0 +1,41 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>刊物列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_publication_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>期刊数量</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"><%= chaos_paginate @publications %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @publications.each do |publication| %>
+      <tr>
+        <td><%= publication.name.truncate(30) %></td>
+        <td><%= publication.volumes.count %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, publication]) %>
+          <%= chaos_button_to_edit edit_admin_publication_path(publication) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

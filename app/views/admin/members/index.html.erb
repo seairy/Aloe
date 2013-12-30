@@ -1,0 +1,76 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>会员列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-user"></i> 添加个人会员' %>
+        <%= chaos_toolbar_to '<i class="icol-user-business"></i> 添加单位会员' %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+        <ul class="dropdown-menu pull-right">
+          <li>
+            <li class="dropdown-submenu">
+              <a href="#"><i class="icol-page-white-wrench"></i> 数据检查</a>
+              <ul class="dropdown-menu">
+                <li><%= link_to raw('<i class="icol-page-2-copy"></i> 重复账号检查'), duplicated_admin_members_path %></li>
+                <li><%= link_to raw('<i class="icol-page-copy"></i> 重复邮箱地址检查'), duplicated_admin_recipients_path %></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu">
+              <a href="#"><i class="icol-page-excel"></i> 数据导出</a>
+              <ul class="dropdown-menu">
+                <li><%= link_to raw('<i class="icol-user"></i> 全部会员导出'), all_members_admin_excels_path(:format => :xls) %></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu">
+              <a href="#"><i class="icol-email"></i> 邮件群发</a>
+              <ul class="dropdown-menu">
+                <li><%= link_to raw('<i class="icol-user"></i> 发邮件给全部会员'), to_all_new_admin_mail_path, target: '_blank' %></li>
+                <li><%= link_to raw('<i class="icol-user-business"></i> 发邮件给永久会员'), to_permanent_new_admin_mail_path, target: '_blank' %></li>
+                <li><%= link_to raw('<i class="icol-user-business-boss"></i> 发邮件给理事'), to_council_member_new_admin_mail_path, target: '_blank' %></li>
+              </ul>
+            </li>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>类型</th>
+          <th>中文姓名/名称</th>
+          <th>国家/地区</th>
+          <th>余额</th>
+          <th>会费有效期</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="6"><%= chaos_paginate @members %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @members.each do |member| %>
+      <tr>
+        <td><%= member.individual? ? '个人会员' : '单位会员' %></td>
+        <td><%= member.chinese_name %></td>
+        <td><%= member.country.name %></td>
+        <td><%= member.balance %>元</td>
+        <td><%= member_expired_at_tag member.expired_at %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, member]) %>
+          <%= chaos_button_to_edit member.individual? ? edit_admin_individual_member_path(member) : edit_admin_organization_member_path(member) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

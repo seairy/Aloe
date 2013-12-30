@@ -1,11 +1,22 @@
 <div id="side">
+  <% if current_page? controller: 'topics', action: 'index' %>
+  <div class="side-row current">
+    <%= link_to raw("&raquo; 全部"), topics_path %>
+  </div>
+  <% else %>
   <div class="side-row">
     <%= link_to raw("&raquo; 全部"), topics_path %>
   </div>
-  <% Forum.sorted.each do |forum| %>
-  <div class="side-row">
-    <%= link_to raw "&raquo; #{forum.name}" %>
-  </div>
   <% end %>
-  <%= side_favorites_tag %>
+  <% Forum.sorted.each do |forum| %>
+  <% if side_topic_current? forum %>
+    <div class="side-row current">
+      <%= link_to raw("&raquo; #{forum.name}"), forum %>
+    </div>
+  <% else %>
+    <div class="side-row">
+      <%= link_to raw("&raquo; #{forum.name}"), forum %>
+    </div>
+  <% end %>
+  <% end %>
 </div>

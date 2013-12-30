@@ -1,0 +1,28 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>邮件信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">未发送</label>
+          <div class="chaos-form-item">
+            <span><%= @unsent_mail_count %>封</span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">已发送</label>
+          <div class="chaos-form-item">
+            <span><%= @sent_mail_count %>封</span>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to name: '发送全部邮件', path: send_admin_mails_path %>
+        <%= chaos_button_to name: '清空已发送邮件', path: clean_admin_mails_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

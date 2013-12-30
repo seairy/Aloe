@@ -1,0 +1,14 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="seminar-list">
+    <ul>
+      <% @seminars.each do |seminar| %>
+      <li>
+        <h2><%= link_to seminar.name, seminar %></h2>
+        <div class="introduction"><%= indent_tag seminar.introduction.strip_tags.strip.truncate(280) %></div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%= render 'side' %>

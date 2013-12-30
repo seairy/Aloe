@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Permission < ActiveRecord::Base
   belongs_to :role
   validates :controller_name, presence: true, length: { maximum: 50 }

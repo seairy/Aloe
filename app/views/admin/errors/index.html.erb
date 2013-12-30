@@ -1,0 +1,35 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>错误列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>操作人</th>
+          <th>名称</th>
+          <th>发生时间</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"><%= chaos_paginate @errors %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @errors.each do |error| %>
+      <tr>
+        <td><%= error.administrator.name %></td>
+        <td><%= error.name %></td>
+        <td><%= datetime_tag error.created_at %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, error]) %>
+          <%= chaos_button_to_destroy url_for([:admin, error]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

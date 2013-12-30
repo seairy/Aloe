@@ -1,0 +1,45 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>单位会员列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_organization_member_path %>
+        <%= chaos_toolbar_to '<i class="icol-magnifier"></i> 搜索' %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>中文名称</th>
+          <th>国家/地区</th>
+          <th>余额</th>
+          <th>会费有效期</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5"><%= chaos_paginate @organization_members %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @organization_members.each do |organization_member| %>
+      <tr>
+        <td><%= organization_member.chinese_name %></td>
+        <td><%= organization_member.country.name %></td>
+        <td><%= organization_member.balance %>元</td>
+        <td><%= organization_member.expired_at %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, organization_member]) %>
+          <%= chaos_button_to_edit edit_admin_organization_member_path(organization_member) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

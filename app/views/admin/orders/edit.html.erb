@@ -1,0 +1,60 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>编辑订单信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @order], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @order %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">会员姓名/名称</label>
+          <div class="chaos-form-item">
+            <span><%= @order.member.chinese_name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">收货人</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">收货地址</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :address %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（座机）</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :phone %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（手机）</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :mobile %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">邮政编码</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :postal_code %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">备注</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :remark %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回订单信息', path: url_for([:admin, @order]) %>
+        <%= chaos_button_to_return '返回会员信息', path: url_for([:admin, @order.member]) %>
+      </div>
+    <% end %>
+  </div>
+</div>

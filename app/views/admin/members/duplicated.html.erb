@@ -1,0 +1,30 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>检查重复账号</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>账号</th>
+          <th>重复</th>
+          <th>相关会员</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"><%= chaos_button_to name: '返回会员列表', path: admin_members_path %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @members.count.each do |duplicated_member| %>
+      <tr>
+        <td><%= duplicated_member[0] %></td>
+        <td><%= duplicated_member[1] %>次</td>
+        <td><%= raw Member.where(account: duplicated_member[0]).map{|m| link_to(m.account, [:admin, m], target: '_blank')}.join('，') %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

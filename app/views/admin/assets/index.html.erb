@@ -1,0 +1,31 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>资源管理</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= flash_tag %>
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>模型</th>
+          <th>资源总量</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @statistics.each do |model_name, count| %>
+      <tr>
+        <td><%= model_name %></td>
+        <td><%= count %></td>
+        <td><%= chaos_button_to name: '<i class="icol-page-white-stack"></i> 重制资源版本', class: 'btn-small', path: recreate_version_admin_assets_path(model_name: model_name) %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

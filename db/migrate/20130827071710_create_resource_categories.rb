@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateResourceCategories < ActiveRecord::Migration
   def change
     create_table :resource_categories do |t|

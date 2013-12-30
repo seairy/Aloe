@@ -44,6 +44,13 @@ module Admin::BaseHelper
   def chaos_paginate model
     raw "<div class=\"pagination-info\">共#{model.count}条记录 共#{model.total_pages}页</div>#{will_paginate model}"
   end
+  
+  def chaos_image_tag image, options = {}
+    cssClass = options[:border] ? 'border' : ''
+    image_url = image.url.blank? ? nil : image.url
+    image_url ||= (options[:size].blank? ? nil : "no-image-#{options[:size]}.png")
+    image_url.blank? ? '无' : image_tag(image_url, class: cssClass)
+  end
 
   def flash_tag
     if flash[:alert]
@@ -60,9 +67,21 @@ module Admin::BaseHelper
   def date_tag date
     date.strftime '%Y-%m-%d' unless date.blank?
   end
+  
+  def blank_tag value, prompt
+    value.blank? ? prompt : value
+  end
+  
+  def boolean_tag boolean
+    boolean ? '是' : '否'
+  end
 
-  def styled_boolean_tag value
-    raw value ? "<span class=\"badge badge-success\">Y</span>" : "<span class=\"badge badge-important\">N</span>"
+  def styled_boolean_tag value, options = {}
+    if options[:true_value].blank? or options[:false_value].blank?
+      raw value ? "<span class=\"badge badge-success\">Y</span>" : "<span class=\"badge badge-important\">N</span>"
+    else
+      raw value ? "<span class=\"badge badge-success\">#{options[:true_value]}</span>" : "<span class=\"badge badge-important\">#{options[:false_value]}</span>"
+    end
   end
   
   def resource_media_type_tag media_type

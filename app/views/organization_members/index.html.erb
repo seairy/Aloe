@@ -1,0 +1,12 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="link-list">
+    <ul>
+      <% @organization_members.each do |organization_member| %>
+      <li>
+        <%= link_to organization_member.chinese_name, organization_member.website, target: '_blank' %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

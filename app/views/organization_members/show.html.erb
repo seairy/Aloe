@@ -1,0 +1,116 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="member-show">
+    <h1>通讯录 - 会员信息</h1>
+    <div class="form form-member">
+      <fieldset>
+        <legend>基本信息</legend>
+        <div class="form-row">
+          <label class="form-label">中文名称：</label>
+          <div class="form-item">
+            <%= @member.chinese_name %>
+          </div>
+        </div>
+        <% unless @member.foreign_name.blank? %>
+        <div class="form-row">
+          <label class="form-label">外文名称：</label>
+          <div class="form-item">
+            <%= @member.foreign_name %>
+          </div>
+        </div>
+        <% end %>
+        <div class="form-row">
+          <label class="form-label">国家/地区：</label>
+          <div class="form-item">
+            <%= @member.country.name %>
+          </div>
+        </div>
+        <% unless @member.organization_type.blank? %>
+        <div class="form-row">
+          <label class="form-label">单位类型：</label>
+          <div class="form-item">
+            <%= @member.organization_type %>
+          </div>
+        </div>
+        <% end %>
+        <div class="form-row">
+          <label class="form-label">单位性质：</label>
+          <div class="form-item">
+            <%= @member.profit? ? '营利' : '非营利' %>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>联系信息</legend>
+        <% unless @member.province.blank? %>
+        <div class="form-row">
+          <label class="form-label">省/市：</label>
+          <div class="form-item">
+            <%= @member.province %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.address.blank? %>
+        <div class="form-row">
+          <label class="form-label">地址：</label>
+          <div class="form-item">
+            <%= @member.address %>
+          </div>
+        </div>
+        <% end %>
+        <% unless @member.postal_code.blank? %>
+        <div class="form-row">
+          <label class="form-label">邮编：</label>
+          <div class="form-item">
+            <%= @member.postal_code %>
+          </div>
+        </div>
+        <% end %>
+        <% @member.contacts.each do |contact| %>
+        <div class="form-row">
+          <label class="form-label">联系人姓名：</label>
+          <div class="form-item">
+            <%= contact.name %>
+          </div>
+        </div>
+        <% unless contact.title.blank? %>
+        <div class="form-row">
+          <label class="form-label">联系人职务：</label>
+          <div class="form-item">
+            <%= contact.title %>
+          </div>
+        </div>
+        <% end %>
+        <% unless contact.phone.blank? %>
+        <div class="form-row">
+          <label class="form-label">电话（座机）：</label>
+          <div class="form-item">
+            <%= contact.phone %>
+          </div>
+        </div>
+        <% end %>
+        <% unless contact.mobile.blank? %>
+        <div class="form-row">
+          <label class="form-label">电话（移动）：</label>
+          <div class="form-item">
+            <%= contact.mobile %>
+          </div>
+        </div>
+        <% end %>
+        <% unless contact.fax.blank? %>
+        <div class="form-row">
+          <label class="form-label">传真：</label>
+          <div class="form-item">
+            <%= contact.fax %>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </fieldset>
+      <div class="form-action">
+        <%= link_to '返回', @member.country, class: 'btn-blue' %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render '/services/side' %>

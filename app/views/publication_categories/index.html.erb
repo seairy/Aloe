@@ -1,0 +1,14 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="publication-category-list">
+    <% @publication_categories.each do |category| %>
+    <h2><%= category.name %></h2>
+    <ul>
+      <% category.articles.each do |article| %>
+      <li><%= link_to article.title.truncate(40) %><span><%= article.author[0..8] %></span></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+<%= render '/publications/side' %>

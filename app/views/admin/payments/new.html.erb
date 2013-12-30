@@ -1,0 +1,61 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>会员缴费</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @member, @payment], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @payment %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">会员姓名/名称</label>
+          <div class="chaos-form-item">
+            <span><%= @member.chinese_name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">缴费年限</label>
+          <div class="chaos-form-item">
+            <div id="payment-year-radio">
+              <%= radio_button_tag :year, 1, true  %><label for="year_1">1年</label>
+              <%= radio_button_tag :year, 2, false %><label for="year_2">2年</label>
+              <%= radio_button_tag :year, 3, false %><label for="year_3">3年</label>
+              <%= radio_button_tag :year, 4, false %><label for="year_4">4年</label>
+              <%= radio_button_tag :year, 5, false %><label for="year_5">5年</label>
+            </div>
+            <%= javascript_tag do %>
+            $(function() {
+              $("#payment-year-radio").buttonset();
+            });
+            $("input[type='radio'][name='year']").change(function(event) {
+              $('span#payment-fee').html($(this).val() * <%= @member.quota %> + '元')
+            });
+            <% end %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">缴费金额</label>
+          <div class="chaos-form-item">
+            <span id="payment-fee">
+              <%= javascript_tag do %>
+              $(function() {
+                $('span#payment-fee').html($("#payment-year-radio :radio:checked").val() * <%= @member.quota %> + '元');
+              });
+              <% end %>
+            </span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">备注</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :remark %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回会员信息', path: url_for([:admin, @member]) %>
+      </div>
+    <% end %>
+  </div>
+</div>

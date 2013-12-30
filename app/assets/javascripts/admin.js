@@ -1,0 +1,12 @@
+//= require kindeditor
+//= require admin/jquery
+//= require admin/jquery.mousewheel
+//= require admin/jquery.placeholder
+//= require admin/jquery-ui
+//= require admin/jquery-ui.custom
+//= require admin/jquery-ui.effects
+//= require admin/jquery-ui.touch-punch
+//= require admin/jquery.query
+//= require admin/jquery.uploadify
+//= require admin/bootstrap
+//= require admin/chaos

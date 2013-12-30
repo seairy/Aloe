@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateArticleCategories < ActiveRecord::Migration
   def change
     create_table :article_categories do |t|

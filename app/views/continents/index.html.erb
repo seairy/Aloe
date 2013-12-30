@@ -1,0 +1,25 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="continent-list">
+    <h1>通讯录</h1>
+    <div id="map-continents">
+      <ul class="continents">
+        <li class="c1"><%= link_to '非洲', @africa %></li>
+        <li class="c2"><%= link_to '亚洲', @asia %></li>
+        <li class="c3"><%= link_to '大洋洲', @australia_and_southern_pacific %></li>
+        <li class="c4"><%= link_to '欧洲', @europe %></li>
+        <li class="c5"><%= link_to '北美洲', @north_america %></li>
+        <li class="c6"><%= link_to '南美洲', @south_america %></li>
+      </ul>
+    </div>
+    <%= javascript_tag do %>
+    $(function($){
+      $('#map-continents').cssMap({
+        'size': 750,
+        'loadingText': '载入中 ...'
+       });
+    });
+    <% end %>
+  </div>
+</div>
+<%= render '/services/side' %>

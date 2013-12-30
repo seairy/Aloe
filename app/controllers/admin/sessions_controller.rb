@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Admin::SessionsController < Admin::BaseController
-  skip_before_filter :authenticate
+  skip_before_filter :authenticate, :find_notifications
   layout :null => true
 
   def create
-  	administrator = Administrator.where(:account => params[:account]).first.try(:authenticate, params[:password])
+  	administrator = Administrator.where(account: params[:account]).first.try(:authenticate, params[:password])
     unless administrator.blank?
       if administrator.available?
         administrator.update_attribute :last_signined_at, administrator.current_signined_at
@@ -20,7 +20,7 @@ class Admin::SessionsController < Admin::BaseController
   end
 
   def destroy
-    reset_session
+    session[:administrator] = nil
     redirect_to admin_signin_path
   end
 end

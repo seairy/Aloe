@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreatePosters < ActiveRecord::Migration
   def change
     create_table :posters do |t|

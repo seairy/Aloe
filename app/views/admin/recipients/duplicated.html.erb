@@ -1,0 +1,30 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>检查重复邮箱地址</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>邮箱地址</th>
+          <th>重复</th>
+          <th>相关会员</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"><%= chaos_button_to name: '清除所有重复邮箱地址', class: 'btn-danger', path: clean_duplicated_admin_recipients_path %> <%= chaos_button_to name: '返回会员列表', path: admin_members_path %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @recipients.count.each do |duplicated_recipient| %>
+      <tr>
+        <td><%= duplicated_recipient[0] %> <%= raw "<span class=\"badge badge-important\">可删除</span>" if Recipient.cleanable?(duplicated_recipient[0]) %></td>
+        <td><%= duplicated_recipient[1] %>次</td>
+        <td><%= raw Recipient.where(name: duplicated_recipient[0]).map{|r| link_to(r.member.chinese_name, [:admin, r.member], target: '_blank')}.join('，') %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

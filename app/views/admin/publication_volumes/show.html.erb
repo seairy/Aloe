@@ -1,0 +1,107 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>期刊信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span>《<%= @publication_volume.publication.name %>》第<%= @publication_volume.name %>期</span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">图片</label>
+          <div class="chaos-form-item">
+            <span><%= chaos_image_tag @publication_volume.image.thumb %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否精华</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= styled_boolean_tag @publication_volume.featured? %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_publication_volume_path(@publication_volume) %>
+        <%= chaos_button_to_destroy url_for([:admin, @publication_volume]) %>
+        <%= chaos_button_to name: '添加分类', path: new_admin_publication_volume_publication_category_path(@publication_volume) %>
+        <%= chaos_button_to name: '添加文章', path: new_admin_publication_volume_publication_article_path(@publication_volume) %>
+        <%= chaos_button_to name: '返回期刊信息', path: url_for([:admin, @publication_volume.publication]) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>分类列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="2">共<%= @publication_volume.categories.count %>个分类</td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @publication_volume.categories.each do |publication_category| %>
+      <tr>
+        <td><%= publication_category.name %></td>
+        <td>
+          <%= chaos_button_to_edit edit_admin_publication_category_path(publication_category) %>
+          <%= chaos_button_to_destroy url_for([:admin, publication_category]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>文章列表</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>分类</th>
+          <th>标题</th>
+          <th>作者</th>
+          <th>工作单位</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="5">共<%= @publication_volume.categories.inject(0){|count, category| count + category.articles.count} %>篇文章</td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @publication_volume.categories.map{|category| category.articles.sorted.all}.flatten.each do |publication_article| %>
+      <tr>
+        <td><%= publication_article.category.name %></td>
+        <td><%= publication_article.title.truncate(26) %></td>
+        <td><%= publication_article.author.truncate(10) %></td>
+        <td><%= publication_article.organization.truncate(10) %></td>
+        <td>
+          <%= chaos_button_to_edit edit_admin_publication_article_path(publication_article) %>
+          <%= chaos_button_to_destroy url_for([:admin, publication_article]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -14,10 +14,9 @@
     <table class="chaos-table">
       <thead>
         <tr>
+          <th>预览图</th>
           <th>标题</th>
-          <th>来源</th>
-          <th>是否可见</th>
-          <th>是否精华</th>
+          <th>状态</th>
           <th class="action">操作</th>
         </tr>
       </thead>
@@ -29,10 +28,9 @@
       <tbody>
       <% @articles.each do |article| %>
       <tr>
-        <td><%= article.title.truncate(28) %></td>
-        <td><%= article.source.truncate(10) %></td>
-        <td><%= styled_boolean_tag article.visible? %></td>
-        <td><%= styled_boolean_tag article.featured? %></td>
+        <td><%= chaos_image_tag article.image.thumb, size: '120x80', border: true %></td>
+        <td><%= article.title.truncate(32) %></td>
+        <td><%= styled_boolean_tag article.visible?, true_value: '可见', false_value: '隐藏' %> <%= styled_boolean_tag article.featured?, true_value: '精华', false_value: '普通' %></td>
         <td>
           <%= chaos_button_to_show url_for([:admin, article]) %>
           <%= chaos_button_to_edit edit_admin_article_path(article) %>

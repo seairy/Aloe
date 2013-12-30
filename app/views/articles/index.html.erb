@@ -6,11 +6,11 @@
       <li>
         <h2><%= link_to article.title.truncate(36), article %><span><%= date_tag article.displayed_at %></span></h2>
         <div class="category"><%= article.category.name %></div>
-        <div class="content"><%= (strip_tags article.content).strip.truncate(150) %></div>
+        <div class="content"><%= indent_tag article.content.strip_tags.strip.truncate(150) %></div>
       </li>
       <% end %>
     </ul>
     <div class="pagination"><%= will_paginate @articles %></div>
   </div>
 </div>
-<%= render 'side' %>
+<%= render '/articles/side' %>

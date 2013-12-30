@@ -1,0 +1,53 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>编辑期刊文章信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @publication_article], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @publication_article %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">期刊</label>
+          <div class="chaos-form-item">
+            <span><%= @publication_article.category.volume.publication.name %>第<%= @publication_article.category.volume.name %>期</span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">分类</label>
+          <div class="chaos-form-item">
+            <%= f.collection_select :category_id, @publication_article.category.volume.categories, :id, :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">标题</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :title %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">作者</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :author %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">工作单位</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :organization %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">摘要</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :abstract %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回期刊信息', path: url_for([:admin, @publication_article.category.volume]) %>
+      </div>
+    <% end %>
+  </div>
+</div>

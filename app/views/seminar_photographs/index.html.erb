@@ -1,0 +1,22 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="seminar-photograph-list">
+    <ul>
+      <% @seminar_photographs.each do |seminar_photograph| %>
+      <li>
+        <%= link_to image_tag(seminar_photograph.image.url), seminar_photograph.image.url, class: 'fancybox-thumb', rel: 'fancybox-thumb' %>
+      </li>
+      <% end %>
+    </ul>
+    <%= javascript_tag do %>
+    $(document).ready(function() {
+    	$(".fancybox-thumb").fancybox({
+    		prevEffect: 'fade',
+    		nextEffect: 'fade'
+    	});
+    });
+    <% end %>
+    <div class="pagination"><%= will_paginate @seminar_photographs %></div>
+  </div>
+</div>
+<%= render '/seminars/side' %>

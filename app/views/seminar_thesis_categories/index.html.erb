@@ -1,0 +1,14 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="seminar-thesis-category-list">
+    <% @thesis_categories.each do |thesis_category| %>
+    <h2><%= thesis_category.name %></h2>
+    <ul>
+      <% thesis_category.theses.each do |thesis| %>
+      <li><%= link_to thesis.title.truncate(44), thesis %><span><%= thesis.author.truncate(8) %></span></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+<%= render '/seminars/side' %>

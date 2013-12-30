@@ -91,7 +91,7 @@ body {
 }
 #chaos-logo-container #chaos-logo-wrap h1 {
 	color:#fff;
-	font:26px 'Yahei';
+	font:26px 'Microsoft Yahei';
 	font-weight:bold;
 }
 #chaos-logo-container #chaos-logo-wrap h1 span {
@@ -326,7 +326,7 @@ body {
 }
 #chaos-navigation>ul>li>a,#chaos-navigation>ul>li>span {
 	color:#fff;
-	font-family:'Yahei';
+	font-family:'Microsoft Yahei';
 	font-size:14px;
 	outline:0;
 	display:block;
@@ -438,7 +438,7 @@ body {
 }
 .chaos-panel .chaos-panel-header span {
 	line-height:22px;
-	font:16px 'Yahei';
+	font:16px 'Microsoft Yahei';
 	overflow:hidden;
 	text-overflow:ellipsis;
 	display:block;
@@ -552,6 +552,10 @@ body {
 }
 .chaos-table tbody tr.even td.sorting_1 {
 	background-color:#e1e1e1
+}
+.chaos-table tbody tr td img.border {
+	padding: 1px;
+	border: 1px #999 solid
 }
 .dataTables_wrapper {
 	background:#444
@@ -753,7 +757,7 @@ body {
 }
 .btn {
 	border-color:#bbb;
-	font-family:'PTSansRegular',Arial,Helvetica,sans-serif
+	font:12px 'PTSansRegular',Arial,Helvetica,sans-serif
 }
 .btn [class^="icon-"] {
 	font-size:14px
@@ -1006,13 +1010,36 @@ body {
 .chaos-form fieldset {
 	margin:0;
 	padding:0;
-	border:0;
-	border-top:1px dotted #bcbcbc
+	border:0
+}
+.chaos-form fieldset:first-child legend {
+	border-top:0
 }
 .chaos-form fieldset legend {
-	margin-left:24px;
-	padding:0 4px;
-	border:1px dotted #bcbcbc
+	margin:0;
+	border:solid #ccc;
+	border-width:1px 0;
+	background:#f8f8f8 repeat-x left bottom;
+	background-image:-ms-linear-gradient(top,#f8f8f8,#e7e7e7);
+	background-image:-webkit-gradient(linear,0 0,0 100%,from(#f8f8f8),to(#e7e7e7));
+	background-image:-webkit-linear-gradient(top,#f8f8f8,#e7e7e7);
+	background-image:-o-linear-gradient(top,#f8f8f8,#e7e7e7);
+	background-image:-moz-linear-gradient(top,#f8f8f8,#e7e7e7);
+	background-image:linear-gradient(top,#f8f8f8,#e7e7e7);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8',endColorstr='#e7e7e7',GradientType=0);
+	color:#555;
+	line-height:24px;
+	padding:8px;
+	padding-left:20px;
+	width:100%;
+	display:block;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box
+}
+.chaos-form fieldset:first-child {
+	border-top:0
 }
 .chaos-form .chaos-form-label {
 	padding-bottom:7px;
@@ -1032,7 +1059,8 @@ body {
 	width:55%
 }
 .chaos-form .chaos-form-item>span {
-	line-height:29px
+	line-height:30px;
+	word-wrap:break-word
 }
 .chaos-form select,.chaos-form textarea,.chaos-form input[type="text"],.chaos-form input[type="password"],.chaos-form input[type="datetime"],.chaos-form input[type="datetime-local"],.chaos-form input[type="date"],.chaos-form input[type="month"],.chaos-form input[type="time"],.chaos-form input[type="week"],.chaos-form input[type="number"],.chaos-form input[type="email"],.chaos-form input[type="url"],.chaos-form input[type="search"],.chaos-form input[type="tel"],.chaos-form input[type="color"] {
 	border:1px solid #c5c5c5;
@@ -1311,13 +1339,14 @@ body {
 	text-align:center
 }
 #chaos-error-page h1 {
-	font-size:48px;
+	font:48px 'Microsoft Yahei';
 	text-align:center;
 	margin:auto;
 	line-height:96px
 }
 #chaos-error-page h1 span {
-	font-size:96px
+	font:96px 'PT Sans';
+	font-weight: bold
 }
 #chaos-error-page a {
 	display:inline-block;

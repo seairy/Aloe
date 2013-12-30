@@ -1,5 +1,4 @@
-# encoding: utf-8
-
+# -*- encoding : utf-8 -*-
 class BaseUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   alias original_url url
@@ -44,7 +43,9 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
   
   def url
-    hashed_name = original_url.scan(/[a-z0-9]{32}/)[0]
-    File.join('/assets', hashed_name[0..1], original_url[1..(original_url.length - 1)])
+    unless original_url.blank?
+      hashed_name = original_url.scan(/[a-z0-9]{32}/)[0]
+      File.join('/assets', hashed_name[0..1], original_url[1..(original_url.length - 1)])
+    end
   end
 end

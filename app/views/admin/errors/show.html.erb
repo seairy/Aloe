@@ -1,0 +1,46 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>错误信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">操作人</label>
+          <div class="chaos-form-item">
+            <span><%= @error.administrator.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @error.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">消息</label>
+          <div class="chaos-form-item">
+            <span><%= @error.message %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">回溯信息</label>
+          <div class="chaos-form-item">
+            <span><%= raw @error.backtrace %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">发生时间</label>
+          <div class="chaos-form-item">
+            <span><%= datetime_tag @error.created_at %></span>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_destroy url_for([:admin, @error]) %>
+        <%= chaos_button_to_list admin_errors_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

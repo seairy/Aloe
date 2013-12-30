@@ -2,28 +2,40 @@
 <head>
 	<meta charset="utf-8" />
 	<title>世界汉语教学学会</title>
-	<%= stylesheet_link_tag 'aloe', 'reset', :media => "all" %>
-	<%= javascript_include_tag 'application', 'unslider' %>
+	<%= stylesheet_link_tag 'application', :media => "all" %>
+	<%= javascript_include_tag 'application' %>
 </head>
 <body>
   <div id="container">
     <div id="header">
+      <div id="profile">
+        <% if signined? %>
+          欢迎您，<%= session[:member][:chinese_name] %> | <%= link_to '会员服务', edit_member_path %> | <%= link_to '退出登录', signout_path %>
+        <% else %>
+          <%= link_to '您好，欢迎加入世界汉语教学学会' %> | <%= link_to '会员登录', signin_path %> | <%= link_to '申请表下载' %>
+        <% end %>
+      </div>
     </div>
     <div id="navi">
       <ul>
         <li><%= link_to '首页', root_path %></li>
         <li><%= link_to '综合信息', articles_path %></li>
-        <li><%= link_to '教学资源', resources_path %></li>
         <li><%= link_to '交流互动', topics_path %></li>
-        <li><%= link_to '图书展示', books_path %></li>
-        <li><%= link_to '历届研讨会' %></li>
         <li><%= link_to '世汉论坛', theses_path %></li>
-        <li><%= link_to '关于我们' %></li>
+        <li><%= link_to '教学资源', resources_path %></li>
+        <li><%= link_to '图书展示', books_path %></li>
+        <li><%= link_to '历届研讨会', seminars_path %></li>
+        <li><%= link_to '关于我们', about_introduction_path %></li>
       </ul>
     </div>
     <div class="clear"></div>
     <div id="content">
       <%= yield %>
+      <%= javascript_tag do %>
+      if ($('#main').height() < $('#side').height()) {
+        $('#main').css('height', $('#side').height() + 80);
+      }
+      <% end %>
       <div class="clear"></div>
     </div>
     <div class="clear"></div>

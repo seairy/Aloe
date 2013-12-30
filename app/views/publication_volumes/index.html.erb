@@ -1,0 +1,21 @@
+<div id="main">
+  <div id="location"><%= location_tag %></div>
+  <div class="publication-volume-list">
+    <ul>
+      <% @publication_volumes.each do |publication_volume| %>
+      <li>
+        <div class="image">
+          <%= default_image_tag publication_volume.image, size: '105x150' %>
+        </div>
+        <div class="property">
+          <h2><%= link_to "《#{publication_volume.publication.name}》第#{publication_volume.name}期".truncate(30), publication_volume %></h2>
+          <div class="description"><%= indent_tag ("内容简介：" + publication_volume.categories.map{|category| category.articles.sorted.all}.flatten.map{|article| article.title}.join('，')).truncate(296) %></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+      <% end %>
+    </ul>
+    <div class="pagination"><%= will_paginate @publication_volumes %></div>
+  </div>
+</div>
+<%= render '/publications/side' %>

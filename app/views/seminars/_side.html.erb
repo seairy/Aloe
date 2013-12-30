@@ -1,0 +1,18 @@
+<div id="side">
+  <% Seminar.sorted.each do |seminar| %>
+  <% if side_seminar_current? seminar %>
+  <div class="side-row side-seminar current">
+    <%= link_to raw("&raquo; #{seminar.name}"), seminar %>
+    <ul>
+      <li><%= link_to '论文选', seminar_thesis_categories_path(seminar) %></li>
+      <li><%= link_to '会议报道', seminar_articles_path(seminar) %></li>
+      <li><%= link_to '会议相册', seminar_photographs_path(seminar) %></li>
+    </ul>
+  </div>
+  <% else %>
+  <div class="side-row side-seminar">
+    <%= link_to raw("&raquo; #{seminar.name}"), seminar %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,35 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>历史订单</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>下单日期</th>
+          <th>总价</th>
+          <th>状态</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% target.orders.each do |order| %>
+      <tr>
+        <td><%= date_tag order.created_at %></td>
+        <td><%= order.total_price %>元</td>
+        <td><%= order_status_tag order.status %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, order]) %>
+          <%= chaos_button_to_edit edit_admin_order_path(order), style: 'list' %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

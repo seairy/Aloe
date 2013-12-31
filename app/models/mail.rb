@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Mail < ActiveRecord::Base
   RECIPIENTS_TYPE_ALL, RECIPIENTS_TYPE_PERMANENT, RECIPIENTS_TYPE_COUNCIL_MEMBER = 'all', 'permanent', 'council_member'
   scope :sent, where(sent: true)

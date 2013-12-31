@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MemberMailer < ActionMailer::Base
   default from: "shihanxuehui@shihan.org.cn"
   

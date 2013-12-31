@@ -12,7 +12,7 @@ class Admin::BaseController < ApplicationController
 
   protected
   def render_error status, exception
-    Error.create(administrator_id: session[:administrator][:id], name: exception.class.to_s, message: exception.message, backtrace: "<p>#{exception.backtrace.join('</p><p>')}</p>")
+    #Error.create(administrator_id: session[:administrator][:id], name: exception.class.to_s, message: exception.message, backtrace: "<p>#{exception.backtrace.join('</p><p>')}</p>")
     render template: "admin/errors/error_#{status}", layout: 'layouts/admin/base', status: status
   end
   

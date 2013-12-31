@@ -88,7 +88,7 @@ Aloe::Application.routes.draw do
     end
     resources :publication_categories
     resources :publication_articles
-    resources :mails do
+    resources :emails do
       get 'send', on: :collection
       get 'clean', on: :collection
       get 'to_all', on: :new

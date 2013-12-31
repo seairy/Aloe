@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Mail < ActiveRecord::Base
+class Email < ActiveRecord::Base
   RECIPIENTS_TYPE_ALL, RECIPIENTS_TYPE_PERMANENT, RECIPIENTS_TYPE_COUNCIL_MEMBER = 'all', 'permanent', 'council_member'
   scope :sent, where(sent: true)
   scope :unsent, where(sent: false)

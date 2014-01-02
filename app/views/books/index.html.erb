@@ -5,7 +5,7 @@
       <% @books.each do |book| %>
       <li>
         <div class="image">
-          <%= image_tag book.image.url %>
+          <%= default_image_tag book.image, size: '105x150' %>
         </div>
         <div class="property">
           <h2><%= link_to book.name.truncate(24), book %></h2>

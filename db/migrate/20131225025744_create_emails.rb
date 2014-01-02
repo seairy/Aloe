@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-class CreateMails < ActiveRecord::Migration
+class CreateEmails < ActiveRecord::Migration
   def change
-    create_table :mails do |t|
+    create_table :emails do |t|
       t.string :recipient, :subject, :limit => 200, :null => false
       t.text :content
       t.boolean :sent, :default => false, :null => false

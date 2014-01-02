@@ -109,6 +109,18 @@ module ApplicationHelper
     end
   end
   
+  def book_price_tag book
+    if book.price.blank?
+      '尚未定价'
+    else
+      currenty = case book.currency
+      when Book::CURRENCY_RMB then 'RMB'
+      when Book::CURRENCY_USD then 'USD'
+      end
+      "#{currenty} #{book.price}"
+    end
+  end
+  
   def member_degree_options
     [['学士', 1], ['硕士', 2], ['博士', 3], ['其它', 4]]
   end

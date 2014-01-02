@@ -1,10 +1,9 @@
 <div id="main-home">
   <div class="theme-bar">
     <div id="poster" class="nivoSlider">
-      <%= link_to image_tag('poster-demo-1.png', title: '世汉网新版正式上线') %>
-      <%= link_to image_tag('poster-demo-4.png', title: '许嘉璐会长 新年致辞') %>
-      <%= link_to image_tag('poster-demo-2.png', title: '许嘉璐会长在研讨会上的讲话') %>
-      <%= link_to image_tag('poster-demo-3.png', title: '世界汉语教学学会 活动照片') %>
+      <% @posters.each do |poster| %>
+      <%= link_to image_tag(poster.image.url, title: poster.title), poster.url %>
+      <% end %>
     </div>
   </div>
   <%= javascript_tag do %>

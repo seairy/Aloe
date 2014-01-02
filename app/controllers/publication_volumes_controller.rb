@@ -11,7 +11,6 @@ class PublicationVolumesController < BaseController
       @publication_volumes = @publication.volumes.sorted_by_time.paginate page: params[:page], per_page: 10
       extend_location_chain @publication.name
     end
-    
   end
   
   def show

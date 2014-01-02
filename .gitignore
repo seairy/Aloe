@@ -2,6 +2,7 @@
 /.bundle
 /db/schema.rb
 /public/assets/*
+/public/uploads/*
 /log/*
 /tmp
 /test

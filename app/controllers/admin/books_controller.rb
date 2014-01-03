@@ -2,7 +2,7 @@
 class Admin::BooksController < Admin::BaseController
   
   def index
-    @books = Book.paginate page: params[:page]
+    @books = Book.sorted.paginate page: params[:page]
   end
   
   def show

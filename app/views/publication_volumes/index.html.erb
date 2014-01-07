@@ -2,6 +2,16 @@
   <div id="location"><%= location_tag %></div>
   <div class="publication-volume-list">
     <ul>
+      <li class="newsletter">
+        <div class="image">
+          <%= image_tag @newsletter.image %>
+        </div>
+        <div class="property">
+          <h2><%= link_to @newsletter.name, newsletters_path %></h2>
+          <div class="description"><%= raw @newsletter.description %></div>
+        </div>
+        <div class="clear"></div>
+      </li>
       <% @publication_volumes.each do |publication_volume| %>
       <li>
         <div class="image">

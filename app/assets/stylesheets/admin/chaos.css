@@ -1822,7 +1822,7 @@ div.jGrowl div.jGrowl-notification,div.jGrowl div.jGrowl-closer {
 	padding:2px 0;
 	line-height:20px
 }
-.pagination a,.pagination span.current,.pagination span.disabled {
+.pagination a,.pagination em.current,.pagination span.disabled {
 	padding:2px 5px;
 	margin-right:2px
 }
@@ -1830,10 +1830,8 @@ div.jGrowl div.jGrowl-notification,div.jGrowl div.jGrowl-closer {
 	border:1px solid #c5d52b;
 	text-decoration:none
 }
-.pagination span.current {
+.pagination em.current {
 	border:1px solid #999999;
-	font-weight:bold;
-	background-color:#aaaaaa;
 	color:#FFF
 }
 .pagination span.disabled {

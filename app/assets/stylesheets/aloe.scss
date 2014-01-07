@@ -1046,6 +1046,17 @@ div.publication-volume-list {
 					line-height: 18px;
 				}
 			}
+			&.newsletter {
+				div.image {
+					img {
+						width: 170px;
+						height: 125px;
+					}
+				}
+				div.property {
+					width: 535px;
+				}
+			}
 		}
 	}
 }

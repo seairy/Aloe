@@ -5,6 +5,7 @@ class PublicationVolumesController < BaseController
   def index
     if params[:publication_id].blank?
       @publication_volumes = PublicationVolume.sorted_by_time.paginate page: params[:page], per_page: 10
+      @newsletter = Newsletter.sorted.first
       extend_location_chain '期刊列表'
     else
       @publication = Publication.find params[:publication_id]

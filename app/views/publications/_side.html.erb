@@ -8,6 +8,9 @@
     <%= link_to raw("&raquo; 全部"), publication_volumes_path %>
   </div>
   <% end %>
+  <div class="side-row">
+    <%= link_to raw("&raquo; 《世界汉语教学学会通讯》"), newsletters_path %>
+  </div>
   <% Publication.all.each do |publication| %>
   <% if side_publication_current? publication %>
   <div class="side-row current">

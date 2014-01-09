@@ -1,0 +1,22 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>搜索</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag admin_search_path, method: :get, class: 'chaos-form' do %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">关键词</label>
+          <div class="chaos-form-item">
+            <%= text_field_tag :keywords %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= submit_tag '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回列表', path: admin_articles_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -9,10 +9,23 @@ class Admin::BaseController < ApplicationController
     rescue_from Exception, with: lambda { |exception| render_error 500, exception }
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
   end
+  
+  def search
+    if params[:keywords].blank?
+      render '/shared/admin/search'
+    else
+      results = controller_name.classify.constantize.search do
+        fulltext params[:keywords]
+        paginate page: params[:page] || 1
+      end.results
+      instance_variable_set("@#{controller_name}", results)
+      render 'index'
+    end
+  end
 
   protected
   def render_error status, exception
-    #Error.create(administrator_id: session[:administrator][:id], name: exception.class.to_s, message: exception.message, backtrace: "<p>#{exception.backtrace.join('</p><p>')}</p>")
+    Error.create(administrator_id: session[:administrator][:id], name: exception.class.to_s, message: exception.message, backtrace: "<p>#{exception.backtrace.join('</p><p>')}</p>")
     render template: "admin/errors/error_#{status}", layout: 'layouts/admin/base', status: status
   end
   

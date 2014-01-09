@@ -8,4 +8,8 @@ class Article < ActiveRecord::Base
   scope :nonimage, where('image IS NULL')
   scope :visible, where(visible: true)
   scope :featured, where(featured: true)
+  
+  searchable do
+    text :title, :content
+  end
 end

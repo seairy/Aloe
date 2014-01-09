@@ -44,6 +44,7 @@ Aloe::Application.routes.draw do
     get 'application_form', to: 'about#application_form', as: :application_form
     get 'faq', to: 'about#faq', as: :faq
   end
+  get ':controller/search', controller: /admin\/[^\/]+/, action: 'search', as: :admin_search
   namespace :admin do
     root :to => 'dashboard#index'
     get 'dashboard', to: 'dashboard#index', as: :dashboard

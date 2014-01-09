@@ -7,4 +7,7 @@ class Contact < ActiveRecord::Base
   validates :phone, length: { maximum: 50 }, on: :update
   validates :mobile, length: { maximum: 50 }, on: :update
   validates :fax, length: { maximum: 50 }, on: :update
+  searchable do
+    text :name, :title, :phone, :mobile, :fax
+  end
 end

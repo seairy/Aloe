@@ -5,6 +5,9 @@ class Recipient < ActiveRecord::Base
   scope :subscribed, where(subscribed: true)
   scope :duplicated, group('name').having('count(id) > 1')
   validates :name, presence: true, length: { maximum: 50 }, email_format: { message: '不是有效的' }
+  searchable do
+    text :name
+  end
   
   class << self
     def cleanable? name

@@ -42,7 +42,8 @@ module Admin::BaseHelper
   end
 
   def chaos_paginate model
-    raw "<div class=\"pagination-info\">共#{model.count}条记录 共#{model.total_pages}页</div>#{will_paginate model}"
+    total_results_count = model.respond_to?(:total_entries) ? model.total_entries : model.count
+    raw "<div class=\"pagination-info\">共#{total_results_count}条记录 共#{model.total_pages}页</div>#{will_paginate model}"
   end
   
   def chaos_image_tag image, options = {}

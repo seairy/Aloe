@@ -8,5 +8,6 @@
 //= require admin/jquery-ui.touch-punch
 //= require admin/jquery.query
 //= require admin/jquery.uploadify
+//= require admin/zero_clipboard
 //= require admin/bootstrap
 //= require admin/chaos

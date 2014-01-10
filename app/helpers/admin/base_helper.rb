@@ -32,9 +32,10 @@ module Admin::BaseHelper
 
   def chaos_button_to options = {}
     name = options[:name] || 'Click'
+    id = options[:id].blank? ? '' : " id=\"#{options[:id]}\""
     css_class = "btn #{options[:class]}"
     onclick = options[:onclick] || "redirectTo('#{options[:path]}')"
-    raw "<button type=\"button\" class=\"#{css_class}\" onclick=\"#{onclick}\">#{name}</button>"
+    raw "<button type=\"button\" class=\"#{css_class}\" onclick=\"#{onclick}\"#{id}>#{name}</button>"
   end
   
   def chaos_toolbar_to name, path = nil

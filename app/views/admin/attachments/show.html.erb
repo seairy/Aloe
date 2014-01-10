@@ -1,0 +1,37 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>附件信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @attachment.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">文件</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= @attachment.file.url %></li>
+              <li><button id="copy-button" data-clipboard-text="<%= @attachment.file.url %>" class="btn">复制</button></li>
+            </ul>
+            <%= javascript_tag do %>
+            var clip = new ZeroClipboard( document.getElementById("copy-button"), {
+              moviePath: "/zero_clipboard/zero_clipboard.swf"
+            });
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_attachment_path(@attachment) %>
+        <%= chaos_button_to_destroy url_for([:admin, @attachment]) %>
+        <%= chaos_button_to_list admin_attachments_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

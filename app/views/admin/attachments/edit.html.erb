@@ -1,0 +1,30 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>编辑附件信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @attachment], html: { class: 'chaos-form', multipart: true } do |f| %>
+      <%= render "shared/admin/error_messages", target: @attachment %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">文件</label>
+          <div class="chaos-form-item">
+            <%= f.file_field :file %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回附件信息', path: url_for([:admin, @attachment]) %>
+        <%= chaos_button_to_return '返回附件列表', path: admin_attachments_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

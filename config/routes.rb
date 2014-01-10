@@ -96,6 +96,7 @@ Aloe::Application.routes.draw do
       get 'to_permanent', on: :new
       get 'to_council_member', on: :new
     end
+    resources :attachments
     resources :excels do
       collection do
         get 'all_members'

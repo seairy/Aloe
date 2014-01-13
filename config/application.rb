@@ -65,6 +65,5 @@ module Aloe
     config.exceptions_app = self.routes
     
     config.i18n.enforce_available_locales = true
-    I18n.enforce_available_locales = true
   end
 end

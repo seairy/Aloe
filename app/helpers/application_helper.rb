@@ -177,4 +177,8 @@ module ApplicationHelper
     when Order::StatusFinished then '已完成'
     end
   end
+  
+  def topic_original_tag original
+    original ? '原创' : "转帖"
+  end
 end

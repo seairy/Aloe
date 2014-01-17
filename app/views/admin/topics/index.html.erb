@@ -31,7 +31,7 @@
       <% @topics.each do |topic| %>
       <tr>
         <td><%= topic.forum.name %></td>
-        <td><%= topic.title.truncate(26) %></td>
+        <td><%= "[#{topic_original_tag topic.original?}]#{topic.title}".truncate(26) %></td>
         <td><%= topic.author.truncate(5) %></td>
         <td><%= styled_boolean_tag topic.visible? %></td>
         <td><%= styled_boolean_tag topic.featured? %></td>

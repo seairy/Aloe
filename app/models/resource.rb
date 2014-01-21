@@ -4,7 +4,7 @@ class Resource < ActiveRecord::Base
   mount_uploader :image, ResourceImageUploader
   mount_uploader :media, ResourceMediaUploader
   belongs_to :category, class_name: 'ResourceCategory'
-  scope :sorted, order('visible ASC, featured ASC, created_at DESC')
-  scope :latest, order('featured ASC, created_at DESC')
+  scope :sorted, order('visible DESC, featured DESC, created_at DESC')
+  scope :latest, order('featured DESC, displayed_at DESC')
   scope :visible, where(visible: true)
 end

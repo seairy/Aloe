@@ -929,9 +929,12 @@ div.thesis-show {
 	div.image {
 		float: left;
 		margin-top: 10px;
-		width: 200px;
-		height: 300px;
-		border: 1px #000 solid;
+		img {
+			padding: 4px;
+			width: 210px;
+			height: 300px;
+			border: 1px #999 solid;
+		}
 	}
 	div.property {
 		float: right;

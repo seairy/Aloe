@@ -2,7 +2,7 @@
 class Admin::ResourcesController < Admin::BaseController
   
   def index
-    @resources = Resource.paginate page: params[:page]
+    @resources = Resource.sorted.paginate page: params[:page]
   end
   
   def show

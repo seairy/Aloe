@@ -1,4 +1,5 @@
 .DS_Store
+/aloe.sublime-workspace
 /.bundle
 /db/schema.rb
 /public/assets/*

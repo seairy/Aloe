@@ -2,7 +2,7 @@
 class Admin::TopicsController < Admin::BaseController
   
   def index
-    @topics = Topic.paginate page: params[:page]
+    @topics = Topic.sorted.paginate page: params[:page]
   end
   
   def show

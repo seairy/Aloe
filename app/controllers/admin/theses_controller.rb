@@ -2,7 +2,7 @@
 class Admin::ThesesController < Admin::BaseController
   
   def index
-    @theses = Thesis.paginate page: params[:page]
+    @theses = Thesis.sorted.paginate page: params[:page]
   end
   
   def show

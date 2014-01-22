@@ -11,6 +11,7 @@ class HomeController < BaseController
     @books = Book.sorted.limit(12)
     @publication_volumes = PublicationVolume.sorted_by_time.limit(2)
     @newsletter = Newsletter.sorted.first
+    @publication_volume = Publication.owned.first.volumes.sorted_by_time.first
     @organization_members = OrganizationMember.sorted_by_pinyin
     @links = Link.sorted.limit(14)
   end

@@ -50,6 +50,7 @@ Aloe::Application.routes.draw do
     get 'dashboard', to: 'dashboard#index', as: :dashboard
     resources :members do
       get 'duplicated', on: :collection
+      get 'generate_password', on: :member
     end
     resources :individual_members do
       resources :recipients

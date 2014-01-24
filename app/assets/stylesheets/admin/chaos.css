@@ -1062,6 +1062,12 @@ body {
 	line-height:30px;
 	word-wrap:break-word
 }
+.chaos-form .chaos-form-item>span.danger {
+	color:#bc4343
+}
+.chaos-form .chaos-form-item>span.bold {
+	font-weight:bold
+}
 .chaos-form select,.chaos-form textarea,.chaos-form input[type="text"],.chaos-form input[type="password"],.chaos-form input[type="datetime"],.chaos-form input[type="datetime-local"],.chaos-form input[type="date"],.chaos-form input[type="month"],.chaos-form input[type="time"],.chaos-form input[type="week"],.chaos-form input[type="number"],.chaos-form input[type="email"],.chaos-form input[type="url"],.chaos-form input[type="search"],.chaos-form input[type="tel"],.chaos-form input[type="color"] {
 	border:1px solid #c5c5c5;
 	padding:4px 6px;

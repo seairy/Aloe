@@ -19,6 +19,14 @@
             <span><%= @organization_member.account %></span>
           </div>
         </div>
+        <% unless params[:generated_password].blank? %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">新密码</label>
+          <div class="chaos-form-item">
+            <span class="danger bold"><%= params[:generated_password] %></span>
+          </div>
+        </div>
+        <% end %>
         <div class="chaos-form-row bordered">
           <label class="chaos-form-label">中文名称</label>
           <div class="chaos-form-item">
@@ -200,6 +208,7 @@
         <%= chaos_button_to_edit edit_admin_organization_member_path(@organization_member) %>
         <%= chaos_button_to name: '添加联系人', path: new_admin_organization_member_contact_path(@organization_member) %>
         <%= chaos_button_to name: '添加邮箱', path: new_admin_organization_member_recipient_path(@organization_member) %>
+        <%= chaos_button_to name: '重置密码', path: generate_password_admin_member_path(@organization_member) %>
         <%= chaos_button_to_list admin_organization_members_path %>
       </div>
     <% end %>

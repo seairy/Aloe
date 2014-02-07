@@ -3,7 +3,7 @@ class HomeController < BaseController
   
   def index
     @posters = Poster.available.sorted.all
-    @imaged_articles = Article.visible.featured.imaged.all
+    @imaged_articles = Article.visible.featured.imaged.latest.all
     @articles = Article.visible.nonimage.latest.limit(19)
     @topics = Topic.visible.sorted.limit(6)
     @theses = Thesis.sorted.limit(6)

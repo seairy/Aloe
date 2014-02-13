@@ -2,7 +2,9 @@
   <div id="location"><%= location_tag %></div>
   <div class="thesis-show">
     <h1><%= @thesis.title %></h1>
-    <div class="image"><%= image_tag @thesis.image.url %></div>
+    <div class="image">
+      <%= default_image_tag(@thesis.image, size: '210x300') %>
+    </div>
     <div class="property">
       <ul>
         <li><span>作者：</span><%= @thesis.author %></li>

@@ -3,7 +3,7 @@
   <div class="book-show">
     <h1><%= @book.name %></h1>
     <div class="image">
-      <%= image_tag @book.image.url %>
+      <%= default_image_tag(@book.image, size: '210x300') %>
     </div>
     <div class="property">
       <ul>

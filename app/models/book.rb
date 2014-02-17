@@ -5,4 +5,8 @@ class Book < ActiveRecord::Base
   belongs_to :book_shelf
   scope :sorted, order('featured DESC, available DESC, created_at DESC')
   scope :available, where(available: true)
+
+  searchable do
+    text :name, :author, :description
+  end
 end

@@ -4,7 +4,7 @@
     <ul>
       <% @organization_members.each do |organization_member| %>
       <li>
-        <%= link_to organization_member.chinese_name, organization_member.website, target: '_blank' %>
+        <%= link_to_unless organization_member.website.blank?, organization_member.chinese_name, "http://#{organization_member.website}", target: '_blank' %>
       </li>
       <% end %>
     </ul>

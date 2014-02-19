@@ -13,6 +13,6 @@ class HomeController < BaseController
     @newsletter = Newsletter.sorted.first
     @publication_volume = Publication.owned.first.volumes.sorted_by_time.first
     @organization_members = OrganizationMember.sorted_by_pinyin
-    @links = Link.sorted.limit(14)
+    @links = Link.sorted.limit(16)
   end
 end

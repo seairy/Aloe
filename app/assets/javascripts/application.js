@@ -7,3 +7,4 @@
 //= require jplayer
 //= require fancybox
 //= require cssmap
+//= require jquery.swfobject

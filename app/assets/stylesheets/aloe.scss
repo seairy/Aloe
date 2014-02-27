@@ -51,6 +51,14 @@ a {
   width: 960px;
   background: #1776b5;
 }
+#swf-content {
+  padding: 40px 0;
+  text-align: center;
+  p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
 #main {
   float: left;
   padding: 16px;
@@ -901,6 +909,11 @@ div.seminar-photograph-list {
         width: 160px;
       }
     }
+  }
+}
+div.seminar-thesis-show {
+  div.content {
+    height: 900px;
   }
 }
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8" />
+  <meta name="google-site-verification" content="PBpoEbRnkB3cdkiO8hPC5TZvkRDq0E_0A8m_kUUn_hU" />
 	<title>世界汉语教学学会</title>
 	<%= stylesheet_link_tag 'application', :media => "all" %>
 	<%= javascript_include_tag 'application' %>
@@ -47,5 +48,15 @@
       </ul>
     </div>
   </div>
+  <%= javascript_tag do %>
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));
+  <% end %>
+  <%= javascript_tag do %>
+    try {
+      var pageTracker = _gat._getTracker("UA-11965971-1");
+      pageTracker._trackPageview();
+    } catch(err) {}
+  <% end %>
 </body>
 </html>

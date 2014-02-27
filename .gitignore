@@ -6,6 +6,7 @@
 /public/assets/*
 /public/uploads/*
 /log/*
+/solr
 /tmp
 /test
 /config/database.yml

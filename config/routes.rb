@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 Aloe::Application.routes.draw do
-  root :to => 'home#index'
+  root to: 'home#index'
   resources :article_categories
   resources :articles
   resources :resource_categories
@@ -46,7 +46,7 @@ Aloe::Application.routes.draw do
   end
   get ':controller/search', controller: /admin\/[^\/]+/, action: 'search', as: :admin_search
   namespace :admin do
-    root :to => 'dashboard#index'
+    root to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index', as: :dashboard
     resources :members do
       get 'duplicated', on: :collection
@@ -91,11 +91,12 @@ Aloe::Application.routes.draw do
     resources :publication_categories
     resources :publication_articles
     resources :emails do
-      get 'send', on: :collection
+      get 'send_mails', on: :collection
       get 'clean', on: :collection
       get 'to_all', on: :new
       get 'to_permanent', on: :new
       get 'to_council_member', on: :new
+
     end
     resources :attachments
     resources :excels do

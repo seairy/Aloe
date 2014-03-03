@@ -3,8 +3,8 @@
     <span>邮件群发</span>
   </div>
   <div class="chaos-panel-body no-padding">
-    <%= form_for [:admin, @mail], html: { class: 'chaos-form', multipart: true } do |f| %>
-      <%= render "shared/admin/error_messages", target: @mail %>
+    <%= form_for [:admin, @email], html: { class: 'chaos-form', multipart: true } do |f| %>
+      <%= render "shared/admin/error_messages", target: @email %>
       <%= hidden_field_tag :to, @recipients_type %>
       <div class="chaos-form-inline">
         <div class="chaos-form-row bordered">

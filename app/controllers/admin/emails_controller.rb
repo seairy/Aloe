@@ -33,11 +33,13 @@ class Admin::EmailsController < Admin::BaseController
   def to
     @email = Email.new
     @recipients_caption = "会员#{Member.find(params[:member_id]).chinese_name}"
+    @recipients_type = params[:member_id]
+    render 'new'
   end
   
   def create
     Email.bulk_create params[:to], params[:email][:subject], params[:email][:content]
-    redirect_to admin_emails_path, notice: '邮件批量创建成功！'
+    redirect_to admin_emails_path, notice: '邮件创建成功！'
   end
   
   def send_mails

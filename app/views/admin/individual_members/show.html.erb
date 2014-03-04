@@ -221,7 +221,7 @@
         <%= chaos_button_to_edit edit_admin_individual_member_path(@individual_member) %>
         <%= chaos_button_to name: '添加邮箱', path: new_admin_individual_member_recipient_path(@individual_member) %>
         <%= chaos_button_to name: '重置密码', path: generate_password_admin_member_path(@individual_member) %>
-        <%= chaos_button_to name: '发送邮件', path: to_new_admin_email_path(@individual_member) %>
+        <%= chaos_button_to name: '发送邮件', path: to_new_admin_email_path(member_id: @individual_member.id) %>
         <%= chaos_button_to_list admin_individual_members_path %>
       </div>
     <% end %>

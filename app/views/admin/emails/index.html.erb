@@ -9,19 +9,19 @@
         <div class="chaos-form-row bordered">
           <label class="chaos-form-label">未发送</label>
           <div class="chaos-form-item">
-            <span><%= @unsent_mail_count %>封</span>
+            <span><%= @unsent_email_count %>封</span>
           </div>
         </div>
         <div class="chaos-form-row bordered">
           <label class="chaos-form-label">已发送</label>
           <div class="chaos-form-item">
-            <span><%= @sent_mail_count %>封</span>
+            <span><%= @sent_email_count %>封</span>
           </div>
         </div>
       </div>
       <div class="chaos-button-row">
-        <%= chaos_button_to name: '发送全部邮件', path: send_admin_mails_path %>
-        <%= chaos_button_to name: '清空已发送邮件', path: clean_admin_mails_path %>
+        <%= chaos_button_to name: '发送全部邮件', path: send_all_admin_emails_path %>
+        <%= chaos_button_to name: '清空已发送邮件', path: clean_admin_emails_path %>
       </div>
     <% end %>
   </div>

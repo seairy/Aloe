@@ -91,12 +91,12 @@ Aloe::Application.routes.draw do
     resources :publication_categories
     resources :publication_articles
     resources :emails do
-      get 'send_mails', on: :collection
+      get 'send_all', on: :collection
       get 'clean', on: :collection
+      get 'to', on: :new
       get 'to_all', on: :new
       get 'to_permanent', on: :new
       get 'to_council_member', on: :new
-
     end
     resources :attachments
     resources :excels do

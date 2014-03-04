@@ -8,6 +8,8 @@ class Email < ActiveRecord::Base
     def bulk_create recipients_type, subject, content
       recipients = case recipients_type
       when RECIPIENTS_TYPE_ALL then Member.approved.map{|m| m.recipients.subscribed.all}
+      else
+        Member.find(recipients_type).recipients.subscribed.all
       end
       recipients.flatten.each do |r|
         self.create({ recipient: r.name, subject: subject, content: content })

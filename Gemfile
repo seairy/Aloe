@@ -26,6 +26,19 @@ gem 'ruby-pinyin', :git => 'git://github.com/janx/ruby-pinyin.git'
 gem 'awesome_nested_set'
 gem 'thin'
 
+group :development do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'

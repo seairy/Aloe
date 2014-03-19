@@ -1,0 +1,41 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>MAILLIST列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_emaillist_path %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>收件人数量</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"><%= chaos_paginate @emaillists %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @emaillists.each do |emaillist| %>
+      <tr>
+        <td><%= emaillist.name %></td>
+        <td><%= emaillist.recipients.count %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, emaillist]) %>
+          <%= chaos_button_to_edit edit_admin_emaillist_path(emaillist) %>
+          <%= chaos_button_to_destroy url_for([:admin, emaillist]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

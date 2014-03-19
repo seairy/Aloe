@@ -30,15 +30,25 @@ class Admin::EmailsController < Admin::BaseController
     render 'new'
   end
 
+  def to_emaillist
+    @email = Email.new
+    emaillist = Emaillist.find params[:emaillist_id]
+    @recipients_caption = "#{emaillist.name}（共#{emaillist.recipients.count}人）"
+    @recipients_type = Email::RECIPIENTS_TYPE_EMAILLIST
+    @recipients_value = params[:emaillist_id]
+    render 'new'
+  end
+
   def to
     @email = Email.new
     @recipients_caption = "会员#{Member.find(params[:member_id]).chinese_name}"
-    @recipients_type = params[:member_id]
+    @recipients_type = Email::RECIPIENTS_TYPE_MEMBER
+    @recipients_value = params[:member_id]
     render 'new'
   end
   
   def create
-    Email.bulk_create params[:to], params[:email][:subject], params[:email][:content]
+    Email.bulk_create params[:recipients_type], params[:recipients_value], params[:email][:subject], params[:email][:content]
     redirect_to admin_emails_path, notice: '邮件创建成功！'
   end
   
@@ -46,8 +56,13 @@ class Admin::EmailsController < Admin::BaseController
     
   end
   
-  def clean
+  def clean_sent
     Email.sent.destroy_all
     redirect_to admin_emails_path, notice: '清空已发送邮件成功！'
+  end
+
+  def clean_unsent
+    Email.unsent.destroy_all
+    redirect_to admin_emails_path, notice: '清空未发送邮件成功！'
   end
 end

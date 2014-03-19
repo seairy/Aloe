@@ -28,7 +28,7 @@
 							<li>
 								<a href="<%= url_for [:admin, notification] %>">
 									<span class="message"><%= notification.title %></span>
-									<span class="time"><%= notification.created_at %></span>
+									<span class="time"><%= datetime_tag notification.created_at %></span>
 								</a>
 							</li>
 							<% end %>
@@ -201,6 +201,8 @@
 					<li>
 						<a href="#">邮件管理</a>
 						<ul>
+							<li><%= link_to 'MAILLIST列表', admin_emaillists_path %></li>
+							<li><%= link_to '添加MAILLIST', new_admin_emaillist_path %></li>
 							<li><%= link_to '邮件信息', admin_emails_path %></li>
 						</ul>
 					</li>

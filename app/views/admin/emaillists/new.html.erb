@@ -1,0 +1,29 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>创建新MAILLIST</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_for [:admin, @emaillist], html: { class: 'chaos-form' } do |f| %>
+      <%= render "shared/admin/error_messages", target: @emaillist %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">收件人列表</label>
+          <div class="chaos-form-item">
+            <%= text_area_tag :recipients %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= f.submit '提交', class: 'btn btn-danger' %>
+        <input type="reset" value="重置" class="btn" />
+        <%= chaos_button_to_return '返回文章列表', path: admin_emaillists_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

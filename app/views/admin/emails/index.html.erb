@@ -21,7 +21,8 @@
       </div>
       <div class="chaos-button-row">
         <%= chaos_button_to name: '发送全部邮件', path: send_all_admin_emails_path %>
-        <%= chaos_button_to name: '清空已发送邮件', path: clean_admin_emails_path %>
+        <%= chaos_button_to name: '清空已发送邮件', path: clean_sent_admin_emails_path, confirm: '确定要清空已发送邮件吗？' %>
+        <%= chaos_button_to name: '清空未发送邮件', path: clean_unsent_admin_emails_path, confirm: '确定要清空未发送邮件吗？', class: 'btn-danger' %>
       </div>
     <% end %>
   </div>

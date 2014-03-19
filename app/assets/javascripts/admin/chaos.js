@@ -1,83 +1,83 @@
 (function($) {
-    $(document).ready(function() {  
+  $(document).ready(function() {  
 
-        // Collapsible Panels
-        $( '.chaos-panel.chaos-collapsible' ).each(function(i, element) {
-            var p = $( element ),   
-                header = p.find( '.chaos-panel-header' );
+    // Collapsible Panels
+    $( '.chaos-panel.chaos-collapsible' ).each(function(i, element) {
+      var p = $( element ),   
+          header = p.find( '.chaos-panel-header' );
 
-            if( header && header.length) {
-                var btn = $('<div class="chaos-collapse-button chaos-inset"><span></span></div>').appendTo(header);
-                $('span', btn).on( 'click', function(e) {
-                    var p = $( this ).parents( '.chaos-panel' );
-                    if( p.hasClass('chaos-collapsed') ) {
-                        p.removeClass( 'chaos-collapsed' )
-                            .children( '.chaos-panel-inner-wrap' ).hide().slideDown( 250 );
-                    } else {
-                        p.children( '.chaos-panel-inner-wrap' ).slideUp( 250, function() {
-                            p.addClass( 'chaos-collapsed' );
-                        });
-                    }
-                    e.preventDefault();
+      if( header && header.length) {
+          var btn = $('<div class="chaos-collapse-button chaos-inset"><span></span></div>').appendTo(header);
+          $('span', btn).on( 'click', function(e) {
+              var p = $( this ).parents( '.chaos-panel' );
+              if( p.hasClass('chaos-collapsed') ) {
+                  p.removeClass( 'chaos-collapsed' )
+                      .children( '.chaos-panel-inner-wrap' ).hide().slideDown( 250 );
+              } else {
+                  p.children( '.chaos-panel-inner-wrap' ).slideUp( 250, function() {
+                      p.addClass( 'chaos-collapsed' );
+                  });
+              }
+              e.preventDefault();
+          });
+      }
+
+      if( !p.children( '.chaos-panel-inner-wrap' ).length ) {
+          p.children( ':not(.chaos-panel-header)' )
+              .wrapAll( $('<div></div>').addClass( 'chaos-panel-inner-wrap' ) );
+      }
+    })
+  
+    /* Side dropdown menu */
+    $("div#chaos-navigation ul li a, div#chaos-navigation ul li span")
+        .on('click', function(event) {
+            if(!!$(this).next('ul').length) {
+                $(this).next('ul').slideToggle('fast', function() {
+                    $(this).toggleClass('closed');
                 });
+                event.preventDefault();
             }
-
-            if( !p.children( '.chaos-panel-inner-wrap' ).length ) {
-                p.children( ':not(.chaos-panel-header)' )
-                    .wrapAll( $('<div></div>').addClass( 'chaos-panel-inner-wrap' ) );
-            }
-        })
+        });
     
-        /* Side dropdown menu */
-        $("div#chaos-navigation ul li a, div#chaos-navigation ul li span")
-            .on('click', function(event) {
-                if(!!$(this).next('ul').length) {
-                    $(this).next('ul').slideToggle('fast', function() {
-                        $(this).toggleClass('closed');
-                    });
-                    event.preventDefault();
-                }
-            });
-        
-        /* Responsive Layout Script */
-        $("#chaos-nav-collapse").on('click', function(e) {
-            $( '#chaos-navigation > ul' ).slideToggle( 'normal', function() {
-                $(this).css('display', '').parent().toggleClass('toggled');
-            });
-            e.preventDefault();
+    /* Responsive Layout Script */
+    $("#chaos-nav-collapse").on('click', function(e) {
+        $( '#chaos-navigation > ul' ).slideToggle( 'normal', function() {
+            $(this).css('display', '').parent().toggleClass('toggled');
         });
-        
-        /* Form Messages */
-        $(".chaos-form-message").on("click", function() {
-            $(this).animate({ opacity:0 }, function() {
-                $(this).slideUp("normal", function() {
-                    $(this).css("opacity", '');
-                });
-            });
-        });
-
-        // Checkable Tables
-        $( 'table thead th.checkbox-column :checkbox' ).on('change', function() {
-            var checked = $( this ).prop( 'checked' );
-            $( this ).parents('table').children('tbody').each(function(i, tbody) {
-                $(tbody).find('.checkbox-column').each(function(j, cb) {
-                    $( ':checkbox', $(cb) ).prop( "checked", checked ).trigger('change');
-                });
-            });
-        });
-        
-        /* File Input Styling */
-        $.fn.fileInput && $("input[type='file']").fileInput();
-
-        // Placeholders
-        $.fn.placeholder && $('[placeholder]').placeholder();
-
-        // Tooltips
-        $.fn.tooltip && $('[rel="tooltip"]').tooltip();
-
-        // Popovers
-        $.fn.popover && $('[rel="popover"]').popover();
+        e.preventDefault();
     });
+    
+    /* Form Messages */
+    $(".chaos-form-message").on("click", function() {
+        $(this).animate({ opacity:0 }, function() {
+            $(this).slideUp("normal", function() {
+                $(this).css("opacity", '');
+            });
+        });
+    });
+
+    // Checkable Tables
+    $( 'table thead th.checkbox-column :checkbox' ).on('change', function() {
+        var checked = $( this ).prop( 'checked' );
+        $( this ).parents('table').children('tbody').each(function(i, tbody) {
+            $(tbody).find('.checkbox-column').each(function(j, cb) {
+                $( ':checkbox', $(cb) ).prop( "checked", checked ).trigger('change');
+            });
+        });
+    });
+    
+    /* File Input Styling */
+    $.fn.fileInput && $("input[type='file']").fileInput();
+
+    // Placeholders
+    $.fn.placeholder && $('[placeholder]').placeholder();
+
+    // Tooltips
+    $.fn.tooltip && $('[rel="tooltip"]').tooltip();
+
+    // Popovers
+    $.fn.popover && $('[rel="popover"]').popover();
+  });
 }) (jQuery);
 
 function submitForm(form) {
@@ -86,7 +86,14 @@ function submitForm(form) {
 }
 
 function redirectTo(path) {
+  document.location.href = path;
+}
+
+function redirectToWithConfirmation(path, confirmation) {
+  if (confirm(confirmation)) {
     document.location.href = path;
+  }
+  return false;
 }
 
 function redirectToDestroy(path) {

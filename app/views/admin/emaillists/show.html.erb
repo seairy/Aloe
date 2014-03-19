@@ -1,0 +1,50 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>MAILLIST信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">名称</label>
+          <div class="chaos-form-item">
+            <span><%= @emaillist.name %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">收件人列表</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list">
+              <% @emaillist.recipients.each do |recipient| %>
+              <li><%= recipient.name %> <%= styled_boolean_tag recipient.available?, true_value: '有效', false_value: '无效' %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">创建时间</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= datetime_tag @emaillist.created_at %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">更新时间</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= datetime_tag @emaillist.updated_at %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_emaillist_path(@emaillist) %>
+        <%= chaos_button_to_destroy url_for([:admin, @emaillist]) %>
+        <%= chaos_button_to name: '发送邮件', path: to_emaillist_new_admin_email_path(emaillist_id: @emaillist.id) %>
+        <%= chaos_button_to_list admin_emaillists_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -5,7 +5,8 @@
   <div class="chaos-panel-body no-padding">
     <%= form_for [:admin, @email], html: { class: 'chaos-form', multipart: true } do |f| %>
       <%= render "shared/admin/error_messages", target: @email %>
-      <%= hidden_field_tag :to, @recipients_type %>
+      <%= hidden_field_tag :recipients_type, @recipients_type %>
+      <%= hidden_field_tag :recipients_value, @recipients_value %>
       <div class="chaos-form-inline">
         <div class="chaos-form-row bordered">
           <label class="chaos-form-label">收件人</label>

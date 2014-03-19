@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.17'
 gem 'mysql'
 gem 'mysql2'
 group :assets do
@@ -21,8 +21,8 @@ gem 'capistrano', '2.15.5'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'rails_kindeditor', '~> 0.4.0'
-gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
-gem 'ruby-pinyin', :git => 'git://github.com/janx/ruby-pinyin.git'
+gem 'validates_email_format_of', git: 'git://github.com/alexdunae/validates_email_format_of.git'
+gem 'ruby-pinyin', git: 'git://github.com/janx/ruby-pinyin.git'
 gem 'awesome_nested_set'
 gem 'thin'
 

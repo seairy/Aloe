@@ -34,7 +34,7 @@ module Admin::BaseHelper
     name = options[:name] || 'Click'
     id = options[:id].blank? ? '' : " id=\"#{options[:id]}\""
     css_class = "btn #{options[:class]}"
-    onclick = options[:onclick] || "redirectTo('#{options[:path]}')"
+    onclick = options[:onclick] || (options[:confirm].blank? ? "redirectTo('#{options[:path]}')" : "redirectToWithConfirmation('#{options[:path]}', '#{options[:confirm]}')")
     raw "<button type=\"button\" class=\"#{css_class}\" onclick=\"#{onclick}\"#{id}>#{name}</button>"
   end
   

@@ -32,6 +32,7 @@ module Aloe
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.enforce_available_locales = false
     config.i18n.default_locale = :'zh-CN'
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -63,7 +64,15 @@ module Aloe
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| "#{html_tag}".html_safe }
     
     config.exceptions_app = self.routes
-    
-    config.i18n.enforce_available_locales = true
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        fixtures: true,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: true,
+        controller_specs: true,
+        request_specs: false
+    end
   end
 end

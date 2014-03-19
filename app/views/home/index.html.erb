@@ -112,6 +112,17 @@
   <div class="clear"></div>
 </div>
 <div id="side" class="home-side">
+  <div class="side-row side-search">
+    <form name="baidu" action="http://www.baidu.com/baidu" target="_blank" class="baidu">
+      <input name="word" maxlength="50" class="keywords" />
+      <input name="submit" type="submit" value="搜索" class="submit" />
+      <input name=tn type=hidden value="bds" />
+      <input name=cl type=hidden value="3" />
+      <input name=ct type=hidden value="2097152" />
+      <input name=si type=hidden value="www.shihan.org.cn" />
+    </form>
+    <div class="clear"></div>
+  </div>
   <div class="side-row side-newsletter center bold">
     <%= link_to image_tag(@newsletter.image.url, alt: @newsletter.name), newsletters_path %>
   </div>

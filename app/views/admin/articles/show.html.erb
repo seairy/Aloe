@@ -80,6 +80,7 @@
       <div class="chaos-button-row">
         <%= chaos_button_to_edit edit_admin_article_path(@article) %>
         <%= chaos_button_to_destroy url_for([:admin, @article]) %>
+        <%= chaos_button_to name: '预览', path: url_for(@article) %>
         <%= chaos_button_to_list admin_articles_path %>
       </div>
     <% end %>

@@ -107,6 +107,7 @@ Aloe::Application.routes.draw do
         get 'all_members'
       end
     end
+    resources :memorabilias
     resources :roles do
       resources :permissions
     end

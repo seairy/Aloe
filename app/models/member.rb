@@ -10,6 +10,8 @@ class Member < ActiveRecord::Base
   scope :permanent, where(permanent: true)
   scope :signin, lambda {|account, password| where(account: account, hashed_password: Digest::MD5.hexdigest(password), approved: true)}
   scope :duplicated, group('account').having('count(id) > 1')
+  scope :domestic, where('country_id IN (100056, 100058, 100072, 100077)')
+  scope :foreign, where('country_id NOT IN (100056, 100058, 100072, 100077)')
   validates :chinese_name, presence: true, length: { maximum: 50 }
   
   def individual?

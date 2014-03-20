@@ -1,85 +1,49 @@
 <div class="chaos-stat-container clearfix">
-  <a class="chaos-stat" href="#">
-    <span class="chaos-stat-icon icol32-user-green"></span>
-    <span class="chaos-stat-content">
-      <span class="chaos-stat-title">会员总数</span>
-      <span class="chaos-stat-value">4125</span>
-    </span>
-  </a>
-  <a class="chaos-stat" href="#">
-    <span class="chaos-stat-icon icol32-page-white-text"></span>
-    <span class="chaos-stat-content">
-      <span class="chaos-stat-title">今日新闻数量</span>
-      <span class="chaos-stat-value">324</span>
-    </span>
-  </a>
-  <a class="chaos-stat" href="#">
-    <span class="chaos-stat-icon icol32-email-open"></span>
-    <span class="chaos-stat-content">
-      <span class="chaos-stat-title">今日稿件数量</span>
-      <span class="chaos-stat-value">2</span>
-    </span>
-  </a>
-  <a class="chaos-stat" href="#">
-    <span class="chaos-stat-icon icol32-package"></span>
-    <span class="chaos-stat-content">
-      <span class="chaos-stat-title">今日订单数量</span>
-      <span class="chaos-stat-value">20</span>
-    </span>
-  </a>
+  <div class="chaos-panel grid_3">
+    <div class="chaos-panel-header">
+      <span>会员数量统计</span>
+    </div>
+    <div class="chaos-panel-body no-padding">
+      <ul class="chaos-summary clearfix">
+        <li>
+          <span class="key">会员总数</span>
+          <span class="val">
+            <span class="text-nowrap"><%= @all_members_count %></span>
+          </span>
+        </li>
+        <li>
+          <span class="key">个人会员（国内）</span>
+          <span class="val">
+            <span class="text-nowrap"><%= @domestic_individual_members_count %></span>
+          </span>
+        </li>
+        <li>
+          <span class="key">个人会员（国外）</span>
+          <span class="val">
+            <span class="text-nowrap"><%= @foreign_individual_members_count %></span>
+          </span>
+        </li>
+        <li>
+          <span class="key">单位会员（国内）</span>
+          <span class="val">
+            <span class="text-nowrap"><%= @domestic_organization_members_count %></span>
+          </span>
+        </li>
+        <li>
+          <span class="key">单位会员（国外）</span>
+          <span class="val">
+            <span class="text-nowrap"><%= @foreign_organization_members_count %></span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="chaos-panel grid_5">
+    <div class="chaos-panel-header">
+      <span><i class="icon-graph"></i> Charts</span>
+    </div>
+    <div class="chaos-panel-body">
+      <div id="chaos-dashboard-chart" style="height: 176px;"></div>
+    </div>
+  </div>
 </div>
-
-<div class="chaos-panel grid_5">
-                	<div class="chaos-panel-header">
-                    	<span><i class="icon-graph"></i> Charts</span>
-                    </div>
-                    <div class="chaos-panel-body">
-                        <div id="chaos-dashboard-chart" style="height: 222px;"></div>
-                    </div>
-                </div>
-                
-            	<div class="chaos-panel grid_3">
-                	<div class="chaos-panel-header">
-                    	<span><i class="icon-book"></i> Website Summary</span>
-                    </div>
-                    <div class="chaos-panel-body no-padding">
-                        <ul class="chaos-summary clearfix">
-                            <li>
-                                <span class="key"><i class="icon-support"></i> Support Tickets</span>
-                                <span class="val">
-                                    <span class="text-nowrap">332</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="key"><i class="icon-certificate"></i> Commision</span>
-                                <span class="val">
-                                    <span class="text-nowrap">71% <i class="up icon-arrow-up"></i></span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="key"><i class="icon-shopping-cart"></i> This Week Sales</span>
-                                <span class="val">
-                                    <span class="text-nowrap">144 <i class="down icon-arrow-down"></i></span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="key"><i class="icon-install"></i> Cash Deposit</span>
-                                <span class="val">
-                                    <span class="text-nowrap">$6,421</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="key"><i class="icon-key"></i> Last Sign In</span>
-                                <span class="val">
-                                    <span class="text-nowrap">September 21, 2012</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="key"><i class="icon-windows"></i> Operating System</span>
-                                <span class="val">
-                                    <span class="text-nowrap">Debian Linux</span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>

@@ -514,6 +514,9 @@ body {
 	border-bottom:1px solid #ccc;
 	border-left:1px solid #ccc
 }
+.chaos-table thead tr th:last-child {
+	width:200px
+}
 .chaos-table .checkbox-column {
 	width:32px;
 	text-align:center
@@ -553,9 +556,13 @@ body {
 .chaos-table tbody tr.even td.sorting_1 {
 	background-color:#e1e1e1
 }
+.chaos-table tbody tr td:last-child {
+	width:200px;
+	line-height:28px
+}
 .chaos-table tbody tr td img.border {
-	padding: 1px;
-	border: 1px #999 solid
+	padding:1px;
+	border:1px #999 solid
 }
 .dataTables_wrapper {
 	background:#444

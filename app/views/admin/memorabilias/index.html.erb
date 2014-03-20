@@ -1,0 +1,41 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>大事记列表</span>
+  </div>
+  <div class="chaos-panel-toolbar">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= chaos_toolbar_to '<i class="icol-pencil"></i> 添加', new_admin_memorabilia_path %>
+      </div>
+    </div>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <table class="chaos-table">
+      <thead>
+        <tr>
+          <th>年份</th>
+          <th>摘要</th>
+          <th class="action">操作</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3"><%= chaos_paginate @memorabilias %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+      <% @memorabilias.each do |memorabilia| %>
+      <tr>
+        <td><%= memorabilia.year %></td>
+        <td><%= memorabilia.content.strip_tags.strip.truncate(150) %></td>
+        <td>
+          <%= chaos_button_to_show url_for([:admin, memorabilia]) %>
+          <%= chaos_button_to_edit edit_admin_memorabilia_path(memorabilia) %>
+          <%= chaos_button_to_destroy url_for([:admin, memorabilia]) %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

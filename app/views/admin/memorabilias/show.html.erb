@@ -1,0 +1,29 @@
+<div class="chaos-panel grid_8">
+  <div class="chaos-panel-header">
+    <span>大事记信息</span>
+  </div>
+  <div class="chaos-panel-body no-padding">
+    <%= form_tag 'nil', class: 'chaos-form' do %>
+      <%= flash_tag %>
+      <div class="chaos-form-inline">
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">年份</label>
+          <div class="chaos-form-item">
+            <span><%= @memorabilia.year %></span>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">内容</label>
+          <div class="chaos-form-item">
+            <%= raw @memorabilia.content %>
+          </div>
+        </div>
+      </div>
+      <div class="chaos-button-row">
+        <%= chaos_button_to_edit edit_admin_memorabilia_path(@memorabilia) %>
+        <%= chaos_button_to_destroy url_for([:admin, @memorabilia]) %>
+        <%= chaos_button_to_list admin_memorabilias_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -7,6 +7,11 @@ class Email < ActiveRecord::Base
   RECIPIENTS_TYPE_MEMBER = 'all', 'permanent', 'council_member', 'emaillist', 'member'
   scope :sent, where(sent: true)
   scope :unsent, where(sent: false)
+
+  def sent!
+    self.update_attribute :sent, true
+    self.update_attribute :sent_at, Time.now
+  end
   
   class << self
     def bulk_create recipients_type, recipients_value, subject, content

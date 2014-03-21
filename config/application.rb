@@ -74,5 +74,15 @@ module Aloe
         controller_specs: true,
         request_specs: false
     end
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address => "192.168.0.252",
+      :domain => "mail.shihan.org.cn",
+      :port => 25,
+      :authentication => :login,
+      :user_name => "shihanxuehui@shihan.org.cn",
+      :password => "shihanxuehui302"
+    }
   end
 end

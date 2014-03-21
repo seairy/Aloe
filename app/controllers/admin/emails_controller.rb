@@ -52,8 +52,9 @@ class Admin::EmailsController < Admin::BaseController
     redirect_to admin_emails_path, notice: '邮件创建成功！'
   end
   
-  def send_mails
-    
+  def send_all
+    Email.unsent.each{|email| Mailer.email(email).deliver}
+    redirect_to admin_emails_path, notice: '邮件发送成功！'
   end
   
   def clean_sent

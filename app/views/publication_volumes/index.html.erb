@@ -2,6 +2,7 @@
   <div id="location"><%= location_tag %></div>
   <div class="publication-volume-list">
     <ul>
+      <% unless @newsletter.blank? %>
       <li class="newsletter">
         <div class="image">
           <%= image_tag @newsletter.image %>
@@ -12,6 +13,7 @@
         </div>
         <div class="clear"></div>
       </li>
+      <% end %>
       <% @publication_volumes.each do |publication_volume| %>
       <li>
         <div class="image">

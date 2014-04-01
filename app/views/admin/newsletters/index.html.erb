@@ -15,20 +15,18 @@
       <thead>
         <tr>
           <th>名称</th>
-          <th>位置</th>
           <th class="action">操作</th>
         </tr>
       </thead>
       <tfoot>
         <tr>
-          <td colspan="3"><%= chaos_paginate @newsletters %></td>
+          <td colspan="2"><%= chaos_paginate @newsletters %></td>
         </tr>
       </tfoot>
       <tbody>
       <% @newsletters.each do |newsletter| %>
       <tr>
         <td><%= newsletter.name %></td>
-        <td><%= newsletter.position %></td>
         <td>
           <%= chaos_button_to_show url_for([:admin, newsletter]) %>
           <%= chaos_button_to_edit edit_admin_newsletter_path(newsletter) %>

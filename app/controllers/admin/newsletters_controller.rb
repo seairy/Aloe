@@ -2,7 +2,7 @@
 class Admin::NewslettersController < Admin::BaseController
   
   def index
-    @newsletters = Newsletter.paginate page: params[:page]
+    @newsletters = Newsletter.sorted.paginate page: params[:page]
   end
   
   def show

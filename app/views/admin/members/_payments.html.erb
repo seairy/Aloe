@@ -27,8 +27,6 @@
         <td><%= date_tag payment.before_expired_at %> 至 <%= date_tag payment.extended_to %></td>
         <td>
           <%= chaos_button_to_show url_for([:admin, payment]) %>
-          <%= chaos_button_to_edit edit_admin_payment_path(payment), style: 'list' %>
-          <%= chaos_button_to_destroy url_for([:admin, payment]), style: 'list' %>
         </td>
       </tr>
       <% end %>

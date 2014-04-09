@@ -230,6 +230,18 @@ a {
 .clear {
   clear: both;
 }
+.notice {
+  background: #DF9;
+  padding: 7px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #BD7;
+  font-size: 13px;
+  color: green;
+}
+.alert {
+  background: #C00;
+  color: #FFF;
+}
 
 /* pagination styles */
 .pagination {

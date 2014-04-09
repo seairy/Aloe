@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class MembersController < BaseController
+  before_filter :authenticate
   before_filter :set_location
   
   def edit
@@ -20,6 +21,20 @@ class MembersController < BaseController
     else
       
     end
+  end
+
+  def update_password
+    @member = Member.find session[:member][:id]
+    if params[:password] != params[:password_confirmation]
+      flash[:alert] = '两次密码输入不一致，请重试'
+    elsif @member.hashed_password != Digest::MD5.hexdigest(params[:original_password])
+      flash[:alert] = '原密码输入不正确，请重试'
+    else
+      @member.hashed_password = Digest::MD5.hexdigest(params[:password])
+      @member.save
+      flash[:notice] = '密码修改成功'
+    end
+    redirect_to edit_password_member_path
   end
   
   protected

@@ -54,7 +54,7 @@ module Admin::BaseHelper
     image_url.blank? ? '无' : image_tag(image_url, class: cssClass)
   end
 
-  def flash_tag
+  def chaos_flash_tag
     if flash[:alert]
       raw "<div class=\"chaos-form-message error\">#{flash[:alert]}</div>"
     elsif flash[:notice]

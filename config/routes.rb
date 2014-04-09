@@ -26,7 +26,10 @@ Aloe::Application.routes.draw do
   resources :publication_categories
   resources :continents
   resources :countries
-  resource :member
+  resource :member do
+    get 'edit_password', on: :collection
+    post 'update_password', on: :collection
+  end
   resources :individual_members
   resources :organization_members
   match 'signin', to: 'sessions#new', as: :signin, via: [:get]

@@ -12,7 +12,7 @@ GIT
       rmmseg-cpp (~> 0.2.9)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     RedCloth (4.2.9)
     actionmailer (3.2.17)

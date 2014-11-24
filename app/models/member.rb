@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Member < ActiveRecord::Base
+  attr_accessor :password
   belongs_to :country
   has_many :contacts
   has_many :recipients
@@ -12,6 +13,9 @@ class Member < ActiveRecord::Base
   scope :duplicated, group('account').having('count(id) > 1')
   scope :domestic, where('country_id IN (100056, 100058, 100072, 100077)')
   scope :foreign, where('country_id NOT IN (100056, 100058, 100072, 100077)')
+  validates :account, presence: true, uniqueness: true, length: { maximum: 16 }, on: :create
+  validates :password, presence: true, confirmation: true, length: { maximum: 16 }, on: :create
+  validates :password_confirmation, presence: true, length: { maximum: 16 }, on: :create
   validates :chinese_name, presence: true, length: { maximum: 50 }
   
   def individual?

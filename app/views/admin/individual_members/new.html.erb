@@ -1,70 +1,172 @@
 <div class="chaos-panel grid_8">
   <div class="chaos-panel-header">
-    <span>创建新文章</span>
+    <span>创建新个人会员</span>
   </div>
   <div class="chaos-panel-body no-padding">
-    <%= form_for [:admin, @article], html: { class: 'chaos-form', multipart: true } do |f| %>
-      <%= render "shared/admin/error_messages", target: @article %>
-      <div class="chaos-form-inline">
+    <%= form_for [:admin, @individual_member], html: { class: 'chaos-form', multipart: true } do |f| %>
+      <%= render "shared/admin/error_messages", target: @individual_member %>
+      <fieldset class="chaos-form-inline">
+        <legend>基本信息</legend>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">分类</label>
+          <label class="chaos-form-label">账号</label>
           <div class="chaos-form-item">
-            <%= f.collection_select :category_id, ArticleCategory.sorted, :id, :name %>
+            <%= f.text_field :account %>
           </div>
         </div>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">图片</label>
+          <label class="chaos-form-label">密码</label>
           <div class="chaos-form-item">
-            <%= f.file_field :image %>
+            <%= f.password_field :password %>
           </div>
         </div>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">标题</label>
+          <label class="chaos-form-label">密码确认</label>
           <div class="chaos-form-item">
-            <%= f.text_field :title %>
+            <%= f.password_field :password_confirmation %>
           </div>
         </div>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">来源</label>
+          <label class="chaos-form-label">中文姓名</label>
           <div class="chaos-form-item">
-            <%= f.text_field :source %>
+            <%= f.text_field :chinese_name %>
           </div>
         </div>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">内容</label>
+          <label class="chaos-form-label">外文姓名</label>
           <div class="chaos-form-item">
-            <%= f.kindeditor :content %>
+            <%= f.text_field :foreign_name %>
           </div>
         </div>
+        <%= fields_for :contact, @contact do |c| %>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">是否可见</label>
+          <label class="chaos-form-label">性别</label>
           <div class="chaos-form-item">
             <ul class="chaos-form-list inline">
-              <li><%= f.check_box :visible, checked: true %></li>
+              <li><%= c.radio_button :gender, Contact::GenderMale %>男</li>
+              <li><%= c.radio_button :gender, Contact::GenderFemale %>女</li>
             </ul>
           </div>
         </div>
+        <% end %>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">是否精华</label>
+          <label class="chaos-form-label">国家/地区</label>
           <div class="chaos-form-item">
-            <ul class="chaos-form-list inline">
-              <li><%= f.check_box :featured %></li>
-            </ul>
+            <%= f.collection_select :country_id, Country.sorted_by_pinyin, :id, :name_with_pinyin %>
           </div>
         </div>
         <div class="chaos-form-row bordered">
-          <label class="chaos-form-label">显示时间</label>
+          <label class="chaos-form-label">学位</label>
+          <div class="chaos-form-item">
+            <%= f.select :degree, member_degree_options %>
+          </div>
+        </div>
+        <%= fields_for :contact, @contact do |c| %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">职务/职称</label>
+          <div class="chaos-form-item">
+            <%= c.text_field :title %>
+          </div>
+        </div>
+        <% end %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">工作单位</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :organization_name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">派出单位</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :dispatched_organization_name %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否为孔院院长</label>
+          <div class="chaos-form-item">
+            <%= f.check_box :president_of_ci %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">是否公开信息</label>
+          <div class="chaos-form-item">
+            <%= f.check_box :public %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">简介</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :description %>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="chaos-form-inline">
+        <legend>联系信息</legend>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">省/市</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :province %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">地址</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :address %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">邮编</label>
+          <div class="chaos-form-item">
+            <%= f.text_field :postal_code %>
+          </div>
+        </div>
+        <%= fields_for :contact, @contact do |c| %>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（座机）</label>
+          <div class="chaos-form-item">
+            <%= c.text_field :phone %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">电话（移动）</label>
+          <div class="chaos-form-item">
+            <%= c.text_field :mobile %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">传真</label>
+          <div class="chaos-form-item">
+            <%= c.text_field :fax %>
+          </div>
+        </div>
+        <% end %>
+      </fieldset>
+      <fieldset class="chaos-form-inline">
+        <legend>管理信息</legend>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">备注</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :remark %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">学术经历</label>
+          <div class="chaos-form-item">
+            <%= f.kindeditor :academic_experience %>
+          </div>
+        </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">入会日期</label>
           <div class="chaos-form-item">
             <ul class="chaos-form-list inline">
-              <li><%= f.datetime_select :displayed_at %></li>
+              <li><%= f.date_select :joined_at %></li>
             </ul>
           </div>
         </div>
-      </div>
+      </fieldset>
       <div class="chaos-button-row">
         <%= f.submit '提交', class: 'btn btn-danger' %>
         <input type="reset" value="重置" class="btn" />
-        <%= chaos_button_to_return '返回文章列表', path: admin_articles_path %>
+        <%= chaos_button_to_return '返回个人会员列表', path: admin_individual_members_path %>
       </div>
     <% end %>
   </div>

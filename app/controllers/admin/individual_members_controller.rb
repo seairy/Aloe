@@ -11,6 +11,7 @@ class Admin::IndividualMembersController < Admin::BaseController
   
   def new
     @individual_member = IndividualMember.new
+    @contact = @individual_member.contacts.new
   end
   
   def edit
@@ -21,7 +22,8 @@ class Admin::IndividualMembersController < Admin::BaseController
   
   def create
     @individual_member = IndividualMember.new(params[:individual_member])
-    if @individual_member.save
+    @contact = @individual_member.contacts.new(params[:contact])
+    if @individual_member.save and @contact.save
       redirect_to [:admin, @individual_member], notice: '创建成功！'
     else
       render action: 'new'

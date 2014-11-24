@@ -11,6 +11,7 @@ class Admin::OrganizationMembersController < Admin::BaseController
   
   def new
     @organization_member = OrganizationMember.new
+    @contact = @organization_member.contacts.new
   end
   
   def edit
@@ -21,7 +22,8 @@ class Admin::OrganizationMembersController < Admin::BaseController
   
   def create
     @organization_member = OrganizationMember.new(params[:organization_member])
-    if @organization_member.save
+    @contact = @organization_member.contacts.new(params[:contact])
+    if @organization_member.save and @contact.save
       redirect_to [:admin, @organization_member], notice: '创建成功！'
     else
       render action: 'new'

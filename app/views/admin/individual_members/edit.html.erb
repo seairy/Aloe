@@ -187,6 +187,14 @@
             </ul>
           </div>
         </div>
+        <div class="chaos-form-row bordered">
+          <label class="chaos-form-label">正式会员</label>
+          <div class="chaos-form-item">
+            <ul class="chaos-form-list inline">
+              <li><%= f.check_box :approved %></li>
+            </ul>
+          </div>
+        </div>
       </fieldset>
       <div class="chaos-button-row">
         <%= f.submit '提交', class: 'btn btn-danger' %>

@@ -33,11 +33,11 @@ class Admin::IndividualMembersController < Admin::BaseController
   def update
     @individual_member = IndividualMember.find(params[:id])
     @contact = @individual_member.contacts.first
-    @recipients = params[:recipients].map{|r| Recipient.find(r[0])}
+    @recipients = params[:recipients].map{|r| Recipient.find(r[0])} if params[:recipients]
     @individual_member.update_attributes(params[:individual_member])
     @contact.update_attributes(params[:contact])
-    @recipients = @recipients.each{|ore| ore.update_attributes(params[:recipients][:"#{ore.id}"])}
-    if @individual_member.errors.any? or @contact.errors.any? or @recipients.map{|r| r.errors.any?}.include?(true)
+    @recipients = @recipients.each{|ore| ore.update_attributes(params[:recipients][:"#{ore.id}"])} if @recipients
+    if @individual_member.errors.any? or @contact.errors.any? or (@recipients and @recipients.map{|r| r.errors.any?}.include?(true))
       @errors_count = @individual_member.errors.count + @contact.errors.count + @recipients.map{|r| r.errors.count}.inject(0){|s, c| s + c}
       render action: 'edit'
     else

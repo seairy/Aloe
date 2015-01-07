@@ -37,6 +37,8 @@ module ApplicationHelper
   
   def side_favorites_tag
     view = "<div class=\"side-row center\">#{link_to image_tag('icon_side_hanban.png'), 'http://www.hanban.org', target: '_blank'}</div>"
+    view += "<div class=\"side-row center\">#{link_to image_tag('icon_side_guide.jpg', class: 'fit'), 'http://www.cltguides.com', target: '_blank'}</div>"
+    view += "<div class=\"side-row center\">#{link_to image_tag('icon_side_library.png', class: 'fit'), 'http://elibrary.chinesecio.com', target: '_blank'}</div>"
     view += "<div class=\"side-row center bold\">#{link_to '网络孔子学院', 'http://www.chinese.cn', target: '_blank'}</div>"
     view += "<div class=\"side-row center bold\">#{link_to '孔子学院大会', 'http://www.chinese.cn/conference/8/', target: '_blank'}</div>"
     view += "<div class=\"side-row center bold\">#{link_to '尼山世界文明论坛', 'http://culture.chinese.cn/nishan/node_12140.htm', target: '_blank'}</div>"

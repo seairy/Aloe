@@ -103,6 +103,9 @@ a {
       font: 12px 'Microsoft Yahei';
       color: #fff;
     }
+    img.fit {
+      width: 160px;
+    }
   }
   div.side-search {
     form.baidu {
@@ -196,7 +199,7 @@ a {
     }
   }
   div.side-member {
-    height: 356px;
+    height: 286px;
     ul {
       overflow: hidden;
     }

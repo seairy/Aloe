@@ -13,7 +13,7 @@
         <% if signined? %>
           欢迎您，<%= session[:member][:chinese_name] %> | <%= link_to '会员服务', edit_member_path %> | <%= link_to '退出登录', signout_path %>
         <% else %>
-          <%= link_to '您好，欢迎加入世界汉语教学学会' %> | <%= link_to '会员登录', signin_path %> | <%= link_to '申请表下载' %>
+          <%= link_to '您好，欢迎加入世界汉语教学学会' %> | <%= link_to '会员登录', signin_path %> | <%= link_to '申请表下载', about_application_form_path %>
         <% end %>
       </div>
     </div>
